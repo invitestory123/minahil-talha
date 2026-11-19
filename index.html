@@ -1,234 +1,402 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#2a050c">
-  <title>Dr. Minahil &amp; Muhammad Talha — Barat Ceremony Invitation</title>
-  <meta name="description" content="Mr. &amp; Mrs. Mahmood Ul Hassan warmly invite you to the Barat Ceremony of their beloved daughter Dr. Minahil Mahmmood with Muhammad Talha Sajid on 11th January 2027 at Marquesina by TOPAZ, Lahore.">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Dr. Minahil &amp; Muhammad Talha — Barat Ceremony Invitation">
-  <meta property="og:description" content="Barat Ceremony · 11th January 2027 · Marquesina by TOPAZ, Lahore">
-  <meta property="og:image" content="editable/assets/envelope-cover.png">
-  <meta property="og:type" content="website">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="editable/assets/tm-seal.png">
+    <title>Dr. Minahil &amp; Muhammad Talha — Barat Ceremony Invitation</title>
+    <meta
+      name="description"
+      content="Mr. &amp; Mrs. Mahmood Ul Hassan warmly invite you to celebrate the Barat Ceremony of their beloved daughter Dr. Minahil Mahmmood with Muhammad Talha Sajid on 11th January 2027 at Marquesina by TOPAZ, Lahore."
+    />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Dr. Minahil &amp; Muhammad Talha — Barat Ceremony Invitation" />
+    <meta
+      property="og:description"
+      content="Barat Ceremony · 11th January 2027 · Marquesina by TOPAZ, Lahore"
+    />
+    <meta property="og:image" content="editable/assets/envelope-cover.png" />
+    <meta property="og:type" content="website" />
 
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="editable/assets/tm-shield-seal.png" />
 
-  <!-- Floating Audio Player -->
-  <audio id="bgmAudio" loop preload="auto" src="editable/assets/bgm.mp3"></audio>
-  <button id="musicToggle" class="music-toggle" type="button" aria-label="Toggle background music">
-    <span class="music-bars" aria-hidden="true">
-      <i></i><i></i><i></i>
-    </span>
-    <span id="musicLabel">Music</span>
-  </button>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Canvas for Floating Gold Particles -->
-  <canvas id="particlesCanvas"></canvas>
+    <!-- Ruby Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css?v=2" />
+    <link rel="stylesheet" href="assets/css/v2.css?v=2" />
+    <link rel="stylesheet" href="assets/css/v3-motion.css?v=3.4" />
+    <link rel="stylesheet" href="assets/css/v4-polish.css?v=4.2" />
+    <link rel="stylesheet" href="assets/css/v5-playback.css?v=5" />
 
-  <!-- =======================================================
-       ENVELOPE OPENING OVERLAY
-       ======================================================= -->
-  <div id="envelopeOverlay" class="envelope-overlay" aria-label="Wax seal envelope opener">
-    <button id="skipEnvelopeBtn" class="skip-btn" type="button">Skip</button>
-    <div class="envelope-wrapper">
-      <div id="openEnvelopeBtn" class="envelope-box" role="button" tabindex="0" aria-label="Tap seal to open invitation">
-        <img class="envelope-bg-image" src="editable/assets/envelope-cover.png" alt="Burgundy envelope with royal gold TM wax seal">
-        <div class="envelope-seal-target">
-          <div class="seal-halo"></div>
+    <!-- Wax Seal Intro & First Page Styling -->
+    <link rel="stylesheet" href="css/wax-intro.css" />
+
+    <meta name="invitation-design" content="Gulnaar-Ruby" />
+  </head>
+
+  <body class="intro-locked">
+
+    <!-- Floating Background Audio -->
+    <audio id="backgroundMusic" loop preload="auto" src="editable/assets/bgm.mp3"></audio>
+
+    <!-- Floating Music Toggle -->
+    <button
+      id="musicToggle"
+      class="music-toggle-btn"
+      type="button"
+      aria-label="Play background music"
+    >
+      <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span id="musicLabel">Music</span>
+    </button>
+
+    <!-- =======================================================
+         1. WAX SEAL INTRO OVERLAY
+         ======================================================= -->
+    <div id="envelopeOverlay" class="wax-envelope-overlay" aria-label="Wax seal envelope opener">
+      <button id="skipIntroBtn" class="intro-skip-btn" type="button">Skip</button>
+      
+      <div id="openSealBtn" class="wax-envelope-box" role="button" tabindex="0" aria-label="Tap wax seal to open invitation">
+        <img class="wax-envelope-bg" src="editable/assets/envelope-cover.png" alt="Burgundy envelope with royal gold TM wax seal">
+        <div class="wax-seal-target">
+          <div class="wax-seal-halo"></div>
         </div>
+      </div>
+
+      <div class="wax-envelope-cue">
+        <div class="wax-envelope-cue-text"><span>✦</span> Tap Seal to Open <span>✦</span></div>
+        <div class="wax-envelope-cue-hint">Dr. Minahil &bull; Muhammad Talha</div>
       </div>
     </div>
-    <div class="envelope-cue">
-      <div class="envelope-cue-text">Tap Seal to Open</div>
-      <div class="envelope-cue-hint">Dr. Minahil &bull; Muhammad Talha</div>
-    </div>
-  </div>
 
-  <!-- =======================================================
-       MAIN INVITATION CONTENT
-       ======================================================= -->
-  <main class="app-container">
+    <!-- =======================================================
+         MAIN INVITATION FLOW
+         ======================================================= -->
+    <main id="invitation">
 
-    <!-- CARD 1: HERO & COUPLE PORTRAIT -->
-    <section class="royal-card">
-      <div class="corner-ornament corner-tl"></div>
-      <div class="corner-ornament corner-tr"></div>
-      <div class="corner-ornament corner-bl"></div>
-      <div class="corner-ornament corner-br"></div>
+      <!-- =======================================================
+           2. FIRST PAGE (ROYAL MODEST COUPLE HERO)
+           ======================================================= -->
+      <section id="hero" class="hero-first-page" aria-label="First Page Wedding Hero">
+        <!-- Modest Couple Artwork (Bare midriff fully covered in royal bridal embroidery) -->
+        <img
+          class="hero-art-background"
+          src="editable/assets/modest-couple-hero.jpg"
+          alt="Dr. Minahil &amp; Muhammad Talha — Royal Barat Ceremony"
+        />
 
-      <!-- Seal Crest Header -->
-      <div class="crest-header">
-        <img class="crest-seal-img" src="editable/assets/tm-seal.png" alt="TM Monogram Wax Seal">
-      </div>
+        <div class="hero-art-scrim"></div>
+        <canvas id="heroParticlesCanvas" class="particles-canvas"></canvas>
 
-      <!-- Islamic Invocations -->
-      <div class="bismillah-arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-      <div class="bismillah-translation">&ldquo;In the name of Allah, the Most Gracious, the Most Merciful&rdquo;</div>
+        <!-- Sky Typography -->
+        <div class="hero-sky-content">
+          <div class="hero-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+          <div class="hero-grace-line">With the grace of Almighty Allah</div>
 
-      <div class="gold-divider">
-        <span>✦</span>
-      </div>
-
-      <!-- Modest Bride & Groom Portrait -->
-      <div class="portrait-wrapper">
-        <div class="portrait-arch">
-          <img src="editable/assets/photo1.jpg" alt="Dr. Minahil &amp; Muhammad Talha in Royal Barat Attire">
-        </div>
-      </div>
-
-      <!-- Host & Parents Line -->
-      <p class="invitation-intro">With the grace of Almighty Allah</p>
-      <h3 class="parent-names">Mr. &amp; Mrs. Mahmood Ul Hassan</h3>
-      <p class="ceremony-eyebrow">Cordially invite you to celebrate the</p>
-      <h2 class="ceremony-title">Barat Ceremony</h2>
-
-      <!-- Couple Names & Relations -->
-      <div class="couple-block">
-        <p class="parent-relation">of their beloved daughter</p>
-        <h1 class="bride-name">Dr. Minahil Mahmmood</h1>
-        
-        <span class="and-symbol">&amp;</span>
-        
-        <h1 class="groom-name">Muhammad Talha Sajid</h1>
-        <p class="parent-relation">Son of Mr. &amp; Mrs. Sajid Hussain</p>
-      </div>
-
-      <div class="gold-divider">
-        <span>✦</span>
-      </div>
-    </section>
-
-    <!-- CARD 2: DATE, TIME & LIVE COUNTDOWN -->
-    <section class="royal-card">
-      <div class="corner-ornament corner-tl"></div>
-      <div class="corner-ornament corner-tr"></div>
-      <div class="corner-ornament corner-bl"></div>
-      <div class="corner-ornament corner-br"></div>
-
-      <h2 class="ceremony-title" style="margin-bottom: 8px;">Date &amp; Time</h2>
-      <p class="ceremony-eyebrow">Save the Auspicious Day</p>
-
-      <div class="event-info-box">
-        <div class="event-date-row">
-          <div class="event-date-col">
-            <span class="date-day-num">11</span>
-            <span class="date-month-year">January 2027</span>
+          <div class="hero-couple-headline">
+            <h1 class="hero-bride-name">Dr. Minahil</h1>
+            <span class="hero-ampersand">&amp;</span>
+            <h1 class="hero-groom-name">Talha</h1>
           </div>
-          <div class="event-divider-vert"></div>
-          <div class="event-date-col">
-            <span class="date-day-num" style="font-size: 26px; text-transform: uppercase;">Monday</span>
-            <span class="date-time-tag">6:30 PM Onwards</span>
-          </div>
+
+          <span class="hero-event-tag">Barat Ceremony</span>
+          <div class="hero-date-line">11 &bull; January &bull; 2027</div>
         </div>
 
-        <div class="gold-divider" style="width: 100%; margin: 8px 0;">
-          <span>✦</span>
-        </div>
-
-        <div class="countdown-title">Counting Down to the Barat</div>
-        <div class="countdown-grid">
-          <div class="countdown-unit">
-            <span id="countdownDays" class="countdown-number">00</span>
-            <span class="countdown-label">Days</span>
-          </div>
-          <div class="countdown-unit">
-            <span id="countdownHours" class="countdown-number">00</span>
-            <span class="countdown-label">Hours</span>
-          </div>
-          <div class="countdown-unit">
-            <span id="countdownMins" class="countdown-number">00</span>
-            <span class="countdown-label">Mins</span>
-          </div>
-          <div class="countdown-unit">
-            <span id="countdownSecs" class="countdown-number">00</span>
-            <span class="countdown-label">Secs</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="action-buttons">
-        <a id="calendarBtn" href="#" class="btn-royal btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          Add to Calendar
+        <!-- Scroll Indicator -->
+        <a class="hero-scroll-cue" href="#welcome">
+          <span>Scroll</span>
+          <i aria-hidden="true"></i>
         </a>
+      </section>
+
+      <!-- =======================================================
+           3. REMAINING SECTIONS FROM RUBY (GULNAAR)
+           ======================================================= -->
+
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
       </div>
-    </section>
 
-    <!-- CARD 3: VENUE & LOCATION -->
-    <section class="royal-card">
-      <div class="corner-ornament corner-tl"></div>
-      <div class="corner-ornament corner-tr"></div>
-      <div class="corner-ornament corner-bl"></div>
-      <div class="corner-ornament corner-br"></div>
-
-      <h2 class="ceremony-title" style="margin-bottom: 8px;">Venue</h2>
-      <p class="ceremony-eyebrow">Location of the Celebration</p>
-
-      <div class="venue-card-inner">
-        <h3 class="venue-name">Marquesina by TOPAZ</h3>
-        <p class="venue-hall">Hall No. 18, 19 &bull; Garrison Marriage Halls Complex</p>
-        <p class="venue-address">
-          Lieutenant Saadat Farooq Shaheed Road, Saddar Town,<br>
-          Cantonment Lahore, Punjab, Pakistan
-        </p>
-
-        <div class="action-buttons">
-          <a href="https://maps.app.goo.gl/c8RdE5n5LQKWovwKA?g_st=ic" target="_blank" rel="noopener noreferrer" class="btn-royal btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            Open in Google Maps
-          </a>
-          <button id="copyAddressBtn" class="btn-royal btn-secondary" type="button">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            Copy Address
-          </button>
+      <!-- SECTION: WELCOME & PARENTAL INVITATION -->
+      <section id="welcome" class="welcome-section section-pad">
+        <div class="section-shell welcome-shell">
+          <div class="welcome-copy reveal">
+            <h2 data-bind="copy.welcomeTitle">A Blessed Beginning</h2>
+            <p data-bind="copy.welcomeBody">
+              With hearts filled with joy and gratitude to Almighty Allah, Mr. &amp; Mrs. Mahmood Ul Hassan cordially invite you to grace the auspicious Barat Ceremony of their beloved daughter Dr. Minahil Mahmmood with Muhammad Talha Sajid (Son of Mr. &amp; Mrs. Sajid Hussain). Your esteemed presence and heartfelt prayers will bestow blessings upon the couple.
+            </p>
+            <div id="welcomeSignature" class="signature">Minahil &amp; Talha</div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- CARD 4: QURANIC BLESSING & FAMILY WISHES -->
-    <section class="royal-card">
-      <div class="corner-ornament corner-tl"></div>
-      <div class="corner-ornament corner-tr"></div>
-      <div class="corner-ornament corner-bl"></div>
-      <div class="corner-ornament corner-br"></div>
-
-      <div class="quran-ayah-arabic">
-        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
-      </div>
-      <p class="quran-ayah-trans">
-        &ldquo;And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.&rdquo;
-      </p>
-      <div class="quran-ayah-ref">&mdash; Surah Ar-Rum (30:21) &mdash;</div>
-
-      <div class="gold-divider">
-        <span>✦</span>
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
       </div>
 
-      <p class="family-closing">
-        With Warmest Duas &amp; Regards<br>
-        <span style="font-size: 11px; color: var(--gold-antique); font-family: var(--font-sans); letter-spacing: 0.12em;">Hassan Family &amp; Hussain Family</span>
-      </p>
-    </section>
+      <!-- SECTION: SCRATCH TO REVEAL DATE -->
+      <section id="date" class="scratch-section section-pad">
+        <div class="section-shell">
+          <header class="section-heading reveal">
+            <span class="eyebrow">A date to hold close</span>
+            <h2 id="scratchHeading">Scratch to Reveal</h2>
+            <span class="ornament" aria-hidden="true"><i></i></span>
+          </header>
 
-  </main>
+          <div class="scratch-frame-shell reveal">
+            <img
+              src="assets/images/scratch-frame-v2.webp"
+              alt=""
+              class="scratch-frame-overlay"
+              aria-hidden="true"
+            />
 
-  <!-- Toast Notification -->
-  <div id="toastNotification" class="toast" role="status" aria-live="polite"></div>
+            <div id="scratchCard" class="scratch-wrap">
+              <div class="date-reveal" aria-live="polite">
+                <span class="date-kicker">You're Invited!</span>
+                <strong class="date-main" data-bind="wedding.date">11 January 2027</strong>
+                <div class="date-day">
+                  <span data-bind="wedding.day">Monday</span>
+                  <a aria-hidden="true">⬩</a>
+                  <span data-bind="wedding.time">6:30 PM Onwards</span>
+                </div>
+              </div>
 
-  <!-- Scripts -->
-  <script src="editable/wedding-data.js"></script>
-  <script src="js/app.js"></script>
-</body>
+              <canvas
+                id="scratchCanvas"
+                class="scratch-canvas"
+                role="button"
+                tabindex="0"
+                aria-label="Scratch to reveal the wedding date. Press Enter to reveal."
+              ></canvas>
+            </div>
+          </div>
+
+          <p id="scratchNote" class="scratch-note reveal">
+            Use your finger or cursor to uncover the moment.
+          </p>
+
+          <div class="cta-row">
+            <button id="saveDateBtn" class="calendar-cta" type="button" data-cal-icon>
+              Add to Calendar
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
+      </div>
+
+      <!-- SECTION: GALLERY / MOMENTS SOFTLY HELD -->
+      <section class="gallery-section section-pad" aria-label="Gallery">
+        <div class="section-shell">
+          <header class="section-heading reveal">
+            <span class="eyebrow">Our story</span>
+            <h2>Moments, softly held</h2>
+            <span class="ornament" aria-hidden="true"><i></i></span>
+          </header>
+
+          <div id="galleryFrame" class="gallery-frame reveal">
+            <div id="gallerySlides"></div>
+            <span class="gallery-corner gallery-corner-a" aria-hidden="true"></span>
+            <span class="gallery-corner gallery-corner-b" aria-hidden="true"></span>
+          </div>
+
+          <div id="galleryDots" class="gallery-dots reveal" aria-label="Choose gallery image"></div>
+        </div>
+      </section>
+
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
+      </div>
+
+      <!-- SECTION: LIVE COUNTDOWN -->
+      <section class="countdown-section section-pad">
+        <div class="section-shell countdown-shell">
+          <header class="section-heading reveal">
+            <span class="eyebrow">Until we celebrate</span>
+            <h2>Counting every heartbeat</h2>
+            <span class="ornament" aria-hidden="true"><i></i></span>
+          </header>
+
+          <div class="countdown reveal" aria-label="Wedding countdown">
+            <div><strong id="countdownDays">00</strong><span>days</span></div>
+            <div><strong id="countdownHours">00</strong><span>hours</span></div>
+            <div><strong id="countdownMinutes">00</strong><span>minutes</span></div>
+            <div><strong id="countdownSeconds">00</strong><span>seconds</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
+      </div>
+
+      <!-- SECTION: CELEBRATION TIMELINE -->
+      <section class="program-section section-pad">
+        <div class="section-shell program-shell">
+          <header class="section-heading reveal">
+            <span class="eyebrow">The celebration</span>
+            <h2>Barat Ceremony Program</h2>
+            <span class="ornament" aria-hidden="true"><i></i></span>
+          </header>
+
+          <div id="programTimeline" class="timeline reveal"></div>
+        </div>
+      </section>
+
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
+      </div>
+
+      <!-- SECTION: THE VENUE -->
+      <section class="venue-section section-pad">
+        <div class="section-shell">
+          <div class="venue-card reveal">
+            <span class="eyebrow">The venue</span>
+
+            <div class="venue-divider" aria-hidden="true">
+              <span>✦</span>
+            </div>
+
+            <h2 data-bind="venue.name">Marquesina by TOPAZ</h2>
+
+            <p data-bind="venue.address">
+              Hall No. 18, 19, Garrison Marriage Halls Complex, Lieutenant Saadat Farooq Shaheed Road, Saddar Town, Cantonment Lahore, Pakistan
+            </p>
+
+            <div class="venue-actions-row">
+              <a
+                id="mapLink"
+                class="venue-map-button"
+                target="_blank"
+                rel="noreferrer"
+                href="https://maps.app.goo.gl/c8RdE5n5LQKWovwKA?g_st=ic"
+              >
+                View on Google Maps
+              </a>
+              <button id="copyAddressBtn" class="btn-secondary-copy" type="button">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copy Address
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
+      </div>
+
+      <!-- SECTION: DRESS CODE -->
+      <section class="dress-section section-pad">
+        <div class="section-shell dress-shell">
+          <div class="dress-copy reveal">
+            <span class="eyebrow">Dress code</span>
+            <h2 data-bind="dressCode.title">Royal Formal / Traditional Barat Attire</h2>
+            <p data-bind="dressCode.description">
+              Traditional festive formal attire is warmly welcomed. Sherwani, Shalwar Kameez with Waistcoat, Prince Coat, Lehenga, Saree, Gharara, Anarkali, and formal evening suits are all encouraged.
+            </p>
+          </div>
+
+          <div id="dressPalette" class="palette reveal" aria-label="Suggested colour palette"></div>
+        </div>
+      </section>
+
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
+      </div>
+
+      <!-- SECTION: PRE-WEDDING FESTIVITIES -->
+      <section class="events-section section-pad">
+        <div class="section-shell">
+          <header class="section-heading reveal">
+            <span class="eyebrow">The Festivities</span>
+            <h2>Days filled with joy</h2>
+            <span class="ornament" aria-hidden="true"><i></i></span>
+          </header>
+
+          <div id="preWeddingEvents" class="event-list reveal"></div>
+
+          <div class="cta-row reveal">
+            <button id="addAllCal" class="calendar-cta" type="button" data-cal-icon>
+              Add all events to calendar
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
+      </div>
+
+      <!-- SECTION: GIFTS & DUAS -->
+      <section class="gifts-section section-pad">
+        <div class="gift-bloom" aria-hidden="true"><i></i><i></i><i></i></div>
+
+        <div class="gift-copy reveal">
+          <span class="eyebrow">With all our hearts</span>
+          <h2>Your presence is our blessing</h2>
+          <p><span data-bind="copy.gifts">Your sincere prayers, warm blessings, and gracious presence are the greatest gifts we could ever ask for.</span></p>
+        </div>
+      </section>
+
+      <!-- Floral Divider -->
+      <div class="floral-divider" aria-hidden="true">
+        <img src="assets/images/floral-divider-v2.webp" alt="" />
+      </div>
+
+      <!-- SECTION: CLOSING DUAS & AYAH -->
+      <footer class="closing-section">
+        <div class="closing-arch reveal">
+          <span class="ornament light" aria-hidden="true"><i></i></span>
+
+          <p class="bismillah closing-quote" data-bind="copy.dua" style="font-family: var(--font-arabic); font-size: 22px; line-height: 1.6; direction: rtl !important;">
+            وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+          </p>
+          <p class="dua-translation" data-bind="copy.duaTranslation" style="font-style: italic; font-size: 14px; opacity: 0.9;">
+            &ldquo;And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.&rdquo; &mdash; Surah Ar-Rum (30:21)
+          </p>
+
+          <h2 data-bind="copy.closing">We look forward to welcoming you.</h2>
+          <div id="closingNames" class="closing-names">Dr. Minahil &amp; Muhammad Talha</div>
+          <small id="closingDetails">Mahmood Ul Hassan &amp; Sajid Hussain Families</small>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
+
+    <!-- Collection Signature Footer -->
+    <footer class="collection-signature collection-signature--velvet" aria-label="Gulnaar Ruby invitation design" style="--signature-ink:#f0d4ac;--signature-paper:#381b23">
+      <span class="collection-signature__rule" aria-hidden="true"></span>
+      <span class="collection-signature__name">Gulnaar &bull; Ruby</span>
+      <span class="collection-signature__line">A luxury celebration in velvet</span>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/v3-motion.js"></script>
+    <script src="assets/js/v5-playback.js"></script>
+    <script src="js/wax-seal.js"></script>
+  </body>
 </html>

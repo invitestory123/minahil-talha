@@ -12,7 +12,7 @@ window.WEDDING_DATA = {
     title: "Barat Ceremony",
     date: "11th January 2027",
     day: "Monday",
-    time: "6:30 PM",
+    time: "6:30 PM Onwards",
     isoDate: "2027-01-11T18:30:00+05:00",
     timezone: "PKT"
   },
@@ -32,8 +32,8 @@ window.WEDDING_DATA = {
   },
   media: {
     envelopeCover: "editable/assets/envelope-cover.png",
-    seal: "editable/assets/tm-seal.png",
-    photo: "editable/assets/photo1.jpg",
+    seal: "editable/assets/tm-shield-seal.png",
+    photo: "editable/assets/modest-couple-hero.jpg",
     music: "editable/assets/bgm.mp3"
   }
 };
