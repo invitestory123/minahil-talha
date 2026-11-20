@@ -57,17 +57,47 @@
     </button>
 
     <!-- =======================================================
-         1. FULL-PAGE WAX SEAL INTRO OVERLAY
+         1. REALISTIC 3D WAX SEAL ENVELOPE OPENER
          ======================================================= -->
-    <div id="envelopeOverlay" class="wax-envelope-fullpage" role="button" tabindex="0" aria-label="Tap seal to open wedding invitation">
+    <div id="envelopeOverlay" class="wax-envelope-fullpage" aria-label="Wax seal envelope opener">
       <button id="skipIntroBtn" class="intro-skip-btn" type="button">Skip</button>
 
-      <!-- Interactive Plain Same-Color Wax Seal Target -->
-      <div id="openSealBtn" class="wax-seal-center-target">
-        <div class="wax-seal-outer-ripple"></div>
+      <!-- 3D Perspective Envelope Scene -->
+      <div id="envelope3D" class="envelope-3d-scene" role="button" tabindex="0" aria-label="Tap wax seal to open invitation">
+        <div class="envelope-3d-body">
+          
+          <!-- Back Pocket of Envelope -->
+          <div class="envelope-back-pocket"></div>
+
+          <!-- Inside Letter Card (Emerges and Slides Up in 3D) -->
+          <div class="envelope-inside-card">
+            <div class="card-crest">
+              <img src="editable/assets/tm-shield-seal.png" alt="TM Crest" />
+            </div>
+            <div class="card-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+            <div class="card-couple">Dr. Minahil &amp; Talha</div>
+            <div class="card-tag">Barat Ceremony &bull; 11 January 2027</div>
+          </div>
+
+          <!-- Front Pocket (Lower V-cut Flaps) -->
+          <div class="envelope-front-pocket"></div>
+
+          <!-- 3D Folding Top Triangular Flap -->
+          <div id="envelopeFlap" class="envelope-flap-3d">
+            <div class="flap-front"></div>
+            <div class="flap-back"></div>
+          </div>
+
+          <!-- Plain Solid Red TM Wax Seal sitting on the Flap Tip -->
+          <div id="openSealBtn" class="envelope-seal-3d" role="button" tabindex="0" aria-label="Break seal to open">
+            <img class="seal-img-3d" src="editable/assets/tm-shield-seal.png" alt="Royal TM Wax Seal" />
+            <div class="seal-ripple-ring"></div>
+          </div>
+
+        </div>
       </div>
 
-      <!-- Bottom Hint & Cue -->
+      <!-- Footer Cue -->
       <div class="wax-envelope-footer">
         <div class="wax-envelope-cue-text"><span>✦</span> Tap Seal to Open <span>✦</span></div>
         <div class="wax-envelope-cue-hint">Dr. Minahil &bull; Muhammad Talha</div>
@@ -83,7 +113,7 @@
            2. FIRST PAGE (ROYAL MODEST COUPLE HERO)
            ======================================================= -->
       <section id="hero" class="hero-first-page" aria-label="First Page Wedding Hero">
-        <!-- Modest Couple Artwork (Bare midriff fully covered in royal bridal embroidery) -->
+        <!-- Modest Couple Artwork (Zero date/ghosts, covered waist in royal embroidery) -->
         <img
           class="hero-art-background"
           src="editable/assets/modest-couple-hero.jpg"
@@ -115,10 +145,6 @@
         </a>
       </section>
 
-      <!-- =======================================================
-           3. REMAINING SECTIONS FROM RUBY (GULNAAR)
-           ======================================================= -->
-
       <!-- Floral Divider -->
       <div class="floral-divider" aria-hidden="true">
         <img src="assets/images/floral-divider-v2.webp" alt="" />
@@ -142,7 +168,7 @@
         <img src="assets/images/floral-divider-v2.webp" alt="" />
       </div>
 
-      <!-- SECTION: SCRATCH TO REVEAL DATE -->
+      <!-- SECTION: SCRATCH TO REVEAL DATE (SIMPLE GOLDEN CARD) -->
       <section id="date" class="scratch-section section-pad">
         <div class="section-shell">
           <header class="section-heading reveal">
@@ -151,14 +177,8 @@
             <span class="ornament" aria-hidden="true"><i></i></span>
           </header>
 
-          <div class="scratch-frame-shell reveal">
-            <img
-              src="assets/images/scratch-frame-v2.webp"
-              alt=""
-              class="scratch-frame-overlay"
-              aria-hidden="true"
-            />
-
+          <!-- Simple Royal Golden Frame -->
+          <div class="gold-scratch-shell reveal">
             <div id="scratchCard" class="scratch-wrap">
               <div class="date-reveal" aria-live="polite">
                 <span class="date-kicker">You're Invited!</span>
@@ -189,30 +209,6 @@
               Add to Calendar
             </button>
           </div>
-        </div>
-      </section>
-
-      <!-- Floral Divider -->
-      <div class="floral-divider" aria-hidden="true">
-        <img src="assets/images/floral-divider-v2.webp" alt="" />
-      </div>
-
-      <!-- SECTION: GALLERY / MOMENTS SOFTLY HELD -->
-      <section class="gallery-section section-pad" aria-label="Gallery">
-        <div class="section-shell">
-          <header class="section-heading reveal">
-            <span class="eyebrow">Our story</span>
-            <h2>Moments, softly held</h2>
-            <span class="ornament" aria-hidden="true"><i></i></span>
-          </header>
-
-          <div id="galleryFrame" class="gallery-frame reveal">
-            <div id="gallerySlides"></div>
-            <span class="gallery-corner gallery-corner-a" aria-hidden="true"></span>
-            <span class="gallery-corner gallery-corner-b" aria-hidden="true"></span>
-          </div>
-
-          <div id="galleryDots" class="gallery-dots reveal" aria-label="Choose gallery image"></div>
         </div>
       </section>
 
@@ -362,20 +358,20 @@
         <img src="assets/images/floral-divider-v2.webp" alt="" />
       </div>
 
-      <!-- SECTION: CLOSING DUAS & AYAH -->
+      <!-- SECTION: CLOSING DUAS & AYAH (FITTED INSIDE ARCH) -->
       <footer class="closing-section">
         <div class="closing-arch reveal">
           <span class="ornament light" aria-hidden="true"><i></i></span>
 
-          <p class="bismillah closing-quote" data-bind="copy.dua" style="font-family: var(--font-arabic); font-size: 22px; line-height: 1.6; direction: rtl !important;">
+          <p class="bismillah closing-quote" data-bind="copy.dua">
             وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
           </p>
-          <p class="dua-translation" data-bind="copy.duaTranslation" style="font-style: italic; font-size: 14px; opacity: 0.9;">
+          <p class="dua-translation" data-bind="copy.duaTranslation">
             &ldquo;And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.&rdquo; &mdash; Surah Ar-Rum (30:21)
           </p>
 
           <h2 data-bind="copy.closing">We look forward to welcoming you.</h2>
-          <div id="closingNames" class="closing-names">Dr. Minahil &amp; Muhammad Talha</div>
+          <div id="closingNames" class="closing-names">Minahil &amp; Talha</div>
           <small id="closingDetails">Mahmood Ul Hassan &amp; Sajid Hussain Families</small>
         </div>
       </footer>

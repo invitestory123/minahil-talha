@@ -1,25 +1,27 @@
 // Dr. Minahil & Muhammad Talha — Configuration
 window.INVITATION_CONFIG = {
   "site": {
-    "title": "Dr. Minahil & Muhammad Talha \u2014 Barat Ceremony Invitation",
-    "description": "Mr. & Mrs. Mahmood Ul Hassan warmly invite you to celebrate the Barat Ceremony of Dr. Minahil Mahmmood and Muhammad Talha Sajid on 11th January 2027 at Marquesina by TOPAZ, Lahore."
+    "title": "Dr. Minahil & Muhammad Talha — Barat Ceremony Invitation",
+    "description": "Mr. & Mrs. Mahmood Ul Hassan warmly invite you to celebrate the Barat Ceremony of their beloved daughter Dr. Minahil Mahmmood with Muhammad Talha Sajid on 11th January 2027 at Marquesina by TOPAZ, Lahore."
   },
   "couple": {
     "brideInitial": "M",
     "groomInitial": "T",
     "bride": {
-      "name": "Dr. Minahil Mahmmood",
+      "name": "Minahil",
+      "fullName": "Dr. Minahil Mahmmood",
       "relation": "Daughter of",
       "parents": "Mr. & Mrs. Mahmood Ul Hassan"
     },
     "groom": {
-      "name": "Muhammad Talha Sajid",
+      "name": "Talha",
+      "fullName": "Muhammad Talha Sajid",
       "relation": "Son of",
       "parents": "Mr. & Mrs. Sajid Hussain"
     }
   },
   "copy": {
-    "bismillah": "\u0628\u0650\u0633\u0652\u0645\u0650 \u0671\u0644\u0644\u064e\u0651\u0670\u0647\u0650 \u0671\u0644\u0631\u064e\u0651\u062d\u0652\u0645\u064e\u0670\u0646\u0650 \u0671\u0644\u0631\u064e\u0651\u062d\u0650\u064a\u0645\u0650",
+    "bismillah": "بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
     "bismillahTranslation": "In the name of Allah, the Most Gracious, the Most Merciful",
     "welcomeLine": "With the grace of Almighty Allah\nMr. & Mrs. Mahmood Ul Hassan\nrequest the honour of your presence at the Barat Ceremony of their daughter",
     "invitation": "Cordially invite you to celebrate the blessed union of",
@@ -28,8 +30,8 @@ window.INVITATION_CONFIG = {
     "welcomeBody": "With hearts filled with joy and gratitude to Almighty Allah, Mr. & Mrs. Mahmood Ul Hassan cordially invite you to grace the auspicious Barat Ceremony of their beloved daughter Dr. Minahil Mahmmood with Muhammad Talha Sajid (Son of Mr. & Mrs. Sajid Hussain). Your esteemed presence and heartfelt prayers will bestow blessings upon the couple.",
     "gifts": "Your sincere prayers, warm blessings, and gracious presence are the greatest gifts we could ever ask for.",
     "closing": "We look forward to welcoming you and celebrating this auspicious occasion with you.",
-    "dua": "\u0648\u064e\u0645\u0650\u0646\u0652 \u0622\u064a\u064e\u0627\u062a\u0650\u0647\u0650 \u0623\u064e\u0646\u0652 \u062e\u064e\u0644\u064e\u0642\u064e \u0644\u064e\u0643\u064f\u0645 \u0645\u0650\u0651\u0646\u0652 \u0623\u064e\u0646\u0641\u064f\u0633\u0650\u0643\u064f\u0645\u0652 \u0623\u064e\u0632\u0652\u0648\u064e\u0627\u062c\u064b\u0627 \u0644\u0650\u0651\u062a\u064e\u0633\u0652\u0643\u064f\u0646\u064f\u0648\u0627 \u0625\u0650\u0644\u064e\u064a\u0652\u0647\u064e\u0627 \u0648\u064e\u062c\u064e\u0639\u064e\u0644\u064e \u0628\u064e\u064a\u0652\u0646\u064e\u0643\u064f\u0645 \u0645\u064e\u0651\u0648\u064e\u062f\u064e\u0651\u0629\u064b \u0648\u064e\u0631\u064e\u062d\u0652\u0645\u064e\u0629\u064b",
-    "duaTranslation": "\u201cAnd of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.\u201d \u2014 Surah Ar-Rum (30:21)"
+    "dua": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
+    "duaTranslation": "“And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.” — Surah Ar-Rum (30:21)"
   },
   "wedding": {
     "isoDate": "2027-01-11T18:30:00+05:00",
@@ -37,26 +39,14 @@ window.INVITATION_CONFIG = {
     "day": "Monday",
     "time": "06:30 PM Onwards",
     "timezone": "PKT",
-    "calendarEvent": "Barat Ceremony \u2014 Dr. Minahil & Muhammad Talha"
+    "calendarEvent": "Barat Ceremony — Dr. Minahil & Muhammad Talha"
   },
   "media": {
     "introVideo": "",
     "introPoster": "editable/assets/envelope-cover.png",
     "music": "editable/assets/bgm.mp3",
     "coupleHero": "editable/assets/modest-couple-hero.jpg",
-    "seal": "editable/assets/tm-shield-seal.png",
-    "gallery": [
-      {
-        "src": "editable/assets/modest-couple-hero.jpg",
-        "alt": "Dr. Minahil & Muhammad Talha",
-        "caption": "A moment of grace and eternal commitment"
-      },
-      {
-        "src": "assets/images/gallery-01.webp",
-        "alt": "Royal Barat celebration moments",
-        "caption": "Together under Allah\u2019s blessings"
-      }
-    ]
+    "seal": "editable/assets/tm-shield-seal.png"
   },
   "program": [
     {
@@ -103,7 +93,7 @@ window.INVITATION_CONFIG = {
       "start": "2027-01-09T18:00:00+05:00",
       "end": "2027-01-09T22:00:00+05:00",
       "date": "January 09, 2027",
-      "time": "6:00 PM \u2014 10:00 PM",
+      "time": "6:00 PM — 10:00 PM",
       "location": "Lahore, Pakistan",
       "mapLink": "https://maps.app.goo.gl/c8RdE5n5LQKWovwKA?g_st=ic",
       "theme": {
@@ -183,11 +173,11 @@ window.INVITATION_CONFIG = {
     "lilac": "#D0B294",
     "champagne": "#C9A35F",
     "scratchFoil": [
-      "#5C0F16",
-      "#8C1620",
-      "#C9A35F",
-      "#8C1620",
-      "#4A0B10"
+      "#F7DF94",
+      "#D4AF37",
+      "#FFF1B8",
+      "#B58925",
+      "#E2BE5E"
     ],
     "petalColors": [
       "linear-gradient(135deg, #C9414F, #8C1620)",
