@@ -33,19 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
     musicToggle.addEventListener('click', toggleMusic);
   }
 
-  // Realistic 3D Envelope Opening Interaction
+  // Royal Wax Seal Envelope Opening Interaction
   const envelopeOverlay = document.getElementById('envelopeOverlay');
-  const envelope3D = document.getElementById('envelope3D');
   const openSealBtn = document.getElementById('openSealBtn');
   const skipIntroBtn = document.getElementById('skipIntroBtn');
 
   let isOpening = false;
 
-  function start3DOpening() {
+  function openEnvelope() {
     if (isOpening) return;
     isOpening = true;
 
-    // Start background audio on gesture
+    // Trigger background audio automatically on user gesture
     if (audio && audio.paused) {
       audio.play().then(() => {
         isPlaying = true;
@@ -54,50 +53,36 @@ document.addEventListener('DOMContentLoaded', () => {
       }).catch(() => {});
     }
 
-    // Step 1: Seal crack and spark
-    if (envelope3D) envelope3D.classList.add('is-breaking');
-
-    // Step 2: 3D Flap folds up and back
-    setTimeout(() => {
-      if (envelope3D) envelope3D.classList.add('is-opening');
-    }, 280);
-
-    // Step 3: Card slides up emerging in 3D
-    setTimeout(() => {
-      if (envelope3D) envelope3D.classList.add('card-revealed');
-    }, 700);
-
-    // Step 4: Smooth transition to Hero First Page
-    setTimeout(() => {
-      if (envelopeOverlay) envelopeOverlay.classList.add('opened');
-      document.body.classList.remove('intro-locked');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1800);
-  }
-
-  function skipImmediately(e) {
-    if (e) e.stopPropagation();
-    isOpening = true;
-    if (envelopeOverlay) envelopeOverlay.classList.add('opened');
+    if (envelopeOverlay) {
+      envelopeOverlay.classList.add('opened');
+    }
+    
+    // Unlock body scroll
     document.body.classList.remove('intro-locked');
-    if (audio && audio.paused) {
-      audio.play().then(() => {
-        isPlaying = true;
-        if (musicToggle) musicToggle.classList.remove('paused');
-        if (musicLabel) musicLabel.textContent = 'Sound';
-      }).catch(() => {});
-    }
+
+    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Trigger resize event after opening so scratch card canvas gets exact dimensions
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 150);
   }
 
   if (openSealBtn) {
-    openSealBtn.addEventListener('click', start3DOpening);
-  }
-  if (envelope3D) {
-    envelope3D.addEventListener('click', start3DOpening);
+    openSealBtn.addEventListener('click', openEnvelope);
   }
   if (skipIntroBtn) {
-    skipIntroBtn.addEventListener('click', skipImmediately);
+    skipIntroBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openEnvelope();
+    });
+  }
+  if (envelopeOverlay) {
+    envelopeOverlay.addEventListener('click', (e) => {
+      if (e.target === skipIntroBtn || (skipIntroBtn && skipIntroBtn.contains(e.target))) return;
+      openEnvelope();
+    });
   }
 
   // Support direct opened link

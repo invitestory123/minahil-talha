@@ -57,47 +57,17 @@
     </button>
 
     <!-- =======================================================
-         1. REALISTIC 3D WAX SEAL ENVELOPE OPENER
+         1. ROYAL WAX SEAL ENVELOPE INTRO (FULL PAGE)
          ======================================================= -->
-    <div id="envelopeOverlay" class="wax-envelope-fullpage" aria-label="Wax seal envelope opener">
+    <div id="envelopeOverlay" class="wax-envelope-fullpage" role="button" tabindex="0" aria-label="Tap seal to open wedding invitation">
       <button id="skipIntroBtn" class="intro-skip-btn" type="button">Skip</button>
 
-      <!-- 3D Perspective Envelope Scene -->
-      <div id="envelope3D" class="envelope-3d-scene" role="button" tabindex="0" aria-label="Tap wax seal to open invitation">
-        <div class="envelope-3d-body">
-          
-          <!-- Back Pocket of Envelope -->
-          <div class="envelope-back-pocket"></div>
-
-          <!-- Inside Letter Card (Emerges and Slides Up in 3D) -->
-          <div class="envelope-inside-card">
-            <div class="card-crest">
-              <img src="editable/assets/tm-shield-seal.png" alt="TM Crest" />
-            </div>
-            <div class="card-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-            <div class="card-couple">Dr. Minahil &amp; Talha</div>
-            <div class="card-tag">Barat Ceremony &bull; 11 January 2027</div>
-          </div>
-
-          <!-- Front Pocket (Lower V-cut Flaps) -->
-          <div class="envelope-front-pocket"></div>
-
-          <!-- 3D Folding Top Triangular Flap -->
-          <div id="envelopeFlap" class="envelope-flap-3d">
-            <div class="flap-front"></div>
-            <div class="flap-back"></div>
-          </div>
-
-          <!-- Plain Solid Red TM Wax Seal sitting on the Flap Tip -->
-          <div id="openSealBtn" class="envelope-seal-3d" role="button" tabindex="0" aria-label="Break seal to open">
-            <img class="seal-img-3d" src="editable/assets/tm-shield-seal.png" alt="Royal TM Wax Seal" />
-            <div class="seal-ripple-ring"></div>
-          </div>
-
-        </div>
+      <!-- Center Wax Seal Interactive Target -->
+      <div id="openSealBtn" class="wax-seal-center-target" role="button" tabindex="0" aria-label="Break seal to open invitation">
+        <div class="wax-seal-outer-ripple"></div>
       </div>
 
-      <!-- Footer Cue -->
+      <!-- Bottom Hint & Cue -->
       <div class="wax-envelope-footer">
         <div class="wax-envelope-cue-text"><span>✦</span> Tap Seal to Open <span>✦</span></div>
         <div class="wax-envelope-cue-hint">Dr. Minahil &bull; Muhammad Talha</div>
