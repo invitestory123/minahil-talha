@@ -64,7 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
     openSealBtn.addEventListener('click', openEnvelope);
   }
   if (skipIntroBtn) {
-    skipIntroBtn.addEventListener('click', openEnvelope);
+    skipIntroBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openEnvelope();
+    });
+  }
+  if (envelopeOverlay) {
+    envelopeOverlay.addEventListener('click', (e) => {
+      if (e.target === skipIntroBtn || skipIntroBtn.contains(e.target)) return;
+      openEnvelope();
+    });
   }
 
   // Support direct opened link

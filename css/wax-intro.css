@@ -1,5 +1,5 @@
 /* =========================================================
-   WAX SEAL INTRO & HERO FIRST PAGE STYLING
+   WAX SEAL INTRO (FULL PAGE) & HERO FIRST PAGE STYLING
    Dr. Minahil & Muhammad Talha — Barat Ceremony
    ========================================================= */
 
@@ -19,155 +19,147 @@
 }
 
 /* =========================================================
-   1. WAX SEAL INTRO OVERLAY
+   1. FULL-PAGE WAX SEAL INTRO OVERLAY
    ========================================================= */
-.wax-envelope-overlay {
+.wax-envelope-fullpage {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
   z-index: 99999;
-  background: radial-gradient(circle at center, #3d0812 0%, #150205 100%);
+  background-color: #2a050c;
+  background-image: url('../editable/assets/envelope-cover.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 18px;
-  transition: opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.1s;
+  justify-content: space-between;
+  padding: 24px 20px 40px;
+  box-sizing: border-box;
+  cursor: pointer;
   overflow: hidden;
+  transition: opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.1s;
 }
 
-.wax-envelope-overlay.opened {
+.wax-envelope-fullpage.opened {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-/* Skip Button */
+/* Top Skip Button */
 .intro-skip-btn {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  z-index: 100001;
-  background: rgba(42, 5, 12, 0.75);
-  border: 1px solid rgba(212, 175, 55, 0.5);
+  align-self: flex-end;
+  background: rgba(42, 5, 12, 0.82);
+  border: 1px solid rgba(212, 175, 55, 0.55);
   color: var(--ivory-warm);
   font-family: var(--font-sans);
   font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 8px 18px;
+  padding: 8px 20px;
   border-radius: 999px;
   cursor: pointer;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
+  z-index: 100001;
 }
 
 .intro-skip-btn:hover {
-  background: rgba(212, 175, 55, 0.2);
+  background: rgba(212, 175, 55, 0.22);
   border-color: var(--gold-bright);
   color: var(--gold-bright);
+  transform: translateY(-1px);
 }
 
-/* Envelope Box */
-.wax-envelope-box {
-  position: relative;
-  width: 100%;
-  max-width: 420px;
-  aspect-ratio: 9 / 14;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 
-    0 30px 70px rgba(0, 0, 0, 0.85),
-    0 0 50px rgba(111, 11, 23, 0.45),
-    inset 0 0 0 1px rgba(212, 175, 55, 0.35);
-  background: #340710;
-  cursor: pointer;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.wax-envelope-box:hover {
-  transform: translateY(-4px) scale(1.015);
-}
-
-.wax-envelope-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Interactive Seal Target */
-.wax-seal-target {
+/* Plain Same Color Wax Seal Interactive Center Target */
+.wax-seal-center-target {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 220px;
-  height: 240px;
+  width: 260px;
+  height: 290px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 
-.wax-seal-halo {
+/* External Golden Ring Ripple (outside the seal - NEVER discolors the wax) */
+.wax-seal-outer-ripple {
   position: absolute;
-  width: 190px;
-  height: 190px;
+  inset: -12px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.5) 0%, transparent 70%);
-  animation: sealPulse 2.4s ease-in-out infinite;
+  border: 2px solid rgba(212, 175, 55, 0.5);
+  opacity: 0;
   pointer-events: none;
+  animation: outerRipple 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
 }
 
-@keyframes sealPulse {
-  0%, 100% {
-    transform: scale(0.9);
-    opacity: 0.5;
+@keyframes outerRipple {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.85;
+    border-color: rgba(255, 215, 0, 0.8);
   }
   50% {
-    transform: scale(1.18);
-    opacity: 0.95;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+    border-color: rgba(212, 175, 55, 0);
   }
 }
 
-.wax-envelope-cue {
-  margin-top: 26px;
+/* Bottom Hint & Cue */
+.wax-envelope-footer {
   text-align: center;
   color: var(--ivory-warm);
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
 }
 
 .wax-envelope-cue-text {
   font-family: var(--font-serif);
-  font-size: 14px;
-  letter-spacing: 0.22em;
+  font-size: 13px;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--gold-bright);
-  text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+  color: #fff4db;
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.9),
+    0 0 16px rgba(212, 175, 55, 0.5);
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  gap: 10px;
+}
+
+.wax-envelope-cue-text span {
+  color: var(--gold-bright);
 }
 
 .wax-envelope-cue-hint {
   font-family: var(--font-script);
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: 0.08em;
   color: var(--ivory-warm);
-  opacity: 0.85;
-  margin-top: 4px;
+  opacity: 0.95;
   font-style: italic;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
 }
 
 /* =========================================================
-   2. HERO FIRST PAGE (ROYAL MODEST COUPLE PORTRAIT)
+   2. HERO FIRST PAGE (HIGH-RESOLUTION MODEST COUPLE PORTRAIT)
    ========================================================= */
 .hero-first-page {
   position: relative;
@@ -182,7 +174,7 @@
   box-sizing: border-box;
 }
 
-/* Background Artwork */
+/* High-Resolution Background Artwork */
 .hero-art-background {
   position: absolute;
   inset: 0;
@@ -191,16 +183,16 @@
   object-fit: cover;
   object-position: center top;
   z-index: 0;
-  filter: brightness(0.95) contrast(1.02);
+  filter: brightness(0.97) contrast(1.03);
 }
 
-/* Ambient Vignette & Tint Overlays */
+/* Ambient Scrim Overlay for Crystal Clear Typography */
 .hero-art-scrim {
   position: absolute;
   inset: 0;
   background: 
-    linear-gradient(to bottom, rgba(42, 5, 12, 0.72) 0%, rgba(42, 5, 12, 0.25) 28%, rgba(42, 5, 12, 0.1) 50%, rgba(42, 5, 12, 0.75) 100%),
-    radial-gradient(circle at 50% 25%, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+    linear-gradient(to bottom, rgba(42, 5, 12, 0.65) 0%, rgba(42, 5, 12, 0.18) 28%, rgba(42, 5, 12, 0.08) 52%, rgba(42, 5, 12, 0.78) 100%),
+    radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.12) 0%, transparent 60%);
   z-index: 1;
   pointer-events: none;
 }
@@ -271,7 +263,7 @@
   100% { height: 13px; }
 }
 
-/* Hero Content (Positioned over the Sky) */
+/* Hero Sky Typography */
 .hero-sky-content {
   position: relative;
   z-index: 3;
@@ -284,23 +276,23 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  padding-top: 10px;
+  padding-top: 12px;
 }
 
-/* Bismillah */
+/* Bismillah Calligraphy */
 .hero-bismillah {
   font-family: var(--font-arabic);
-  font-size: 24px;
+  font-size: 25px;
   line-height: 1.4;
   color: var(--gold-bright);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   letter-spacing: 0.04em;
   margin-bottom: 2px;
 }
 
 .hero-grace-line {
   font-family: var(--font-script);
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 0.12em;
   color: var(--ivory-warm);
   opacity: 0.95;
@@ -319,14 +311,14 @@
 .hero-bride-name,
 .hero-groom-name {
   font-family: var(--font-serif);
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #fff4db;
+  color: #fff6e0;
   text-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.8),
-    0 0 20px rgba(212, 175, 55, 0.4);
+    0 2px 8px rgba(0, 0, 0, 0.85),
+    0 0 22px rgba(212, 175, 55, 0.45);
   line-height: 1.25;
 }
 
@@ -357,10 +349,10 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ivory-cream);
-  background: rgba(42, 5, 12, 0.65);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: rgba(42, 5, 12, 0.70);
+  border: 1px solid rgba(212, 175, 55, 0.45);
   border-radius: 999px;
-  padding: 4px 14px;
+  padding: 4px 16px;
   margin-top: 4px;
   backdrop-filter: blur(6px);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);

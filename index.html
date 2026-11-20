@@ -57,19 +57,18 @@
     </button>
 
     <!-- =======================================================
-         1. WAX SEAL INTRO OVERLAY
+         1. FULL-PAGE WAX SEAL INTRO OVERLAY
          ======================================================= -->
-    <div id="envelopeOverlay" class="wax-envelope-overlay" aria-label="Wax seal envelope opener">
+    <div id="envelopeOverlay" class="wax-envelope-fullpage" role="button" tabindex="0" aria-label="Tap seal to open wedding invitation">
       <button id="skipIntroBtn" class="intro-skip-btn" type="button">Skip</button>
-      
-      <div id="openSealBtn" class="wax-envelope-box" role="button" tabindex="0" aria-label="Tap wax seal to open invitation">
-        <img class="wax-envelope-bg" src="editable/assets/envelope-cover.png" alt="Burgundy envelope with royal gold TM wax seal">
-        <div class="wax-seal-target">
-          <div class="wax-seal-halo"></div>
-        </div>
+
+      <!-- Interactive Plain Same-Color Wax Seal Target -->
+      <div id="openSealBtn" class="wax-seal-center-target">
+        <div class="wax-seal-outer-ripple"></div>
       </div>
 
-      <div class="wax-envelope-cue">
+      <!-- Bottom Hint & Cue -->
+      <div class="wax-envelope-footer">
         <div class="wax-envelope-cue-text"><span>✦</span> Tap Seal to Open <span>✦</span></div>
         <div class="wax-envelope-cue-hint">Dr. Minahil &bull; Muhammad Talha</div>
       </div>
