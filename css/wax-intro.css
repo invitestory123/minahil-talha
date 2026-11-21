@@ -20,7 +20,7 @@
 
 /* =========================================================
    1. ROYAL WAX SEAL ENVELOPE INTRO (FULL PAGE)
-   Dr. Minahil & Muhammad Talha — Barat Ceremony
+   Exact White Embossed Floral Envelope as shown in mobile video
    ========================================================= */
 .wax-envelope-fullpage {
   position: fixed;
@@ -29,8 +29,8 @@
   height: 100vh;
   height: 100svh;
   z-index: 99999;
-  background-color: #2a050c;
-  background-image: url('../editable/assets/envelope-cover.png');
+  background-color: #f7f6f4;
+  background-image: url('../editable/assets/white-envelope-cover.png');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,12 +42,13 @@
   box-sizing: border-box;
   cursor: pointer;
   overflow: hidden;
-  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.85s;
+  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), filter 0.85s ease, visibility 0.85s;
 }
 
 .wax-envelope-fullpage.opened {
   opacity: 0;
-  transform: scale(1.08);
+  transform: scale(1.06);
+  filter: blur(4px);
   visibility: hidden;
   pointer-events: none;
 }
@@ -55,38 +56,39 @@
 /* Top Skip Button */
 .intro-skip-btn {
   align-self: flex-end;
-  background: rgba(42, 5, 12, 0.82);
-  border: 1px solid rgba(212, 175, 55, 0.55);
-  color: var(--ivory-warm);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  color: #3e3b38;
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 8px 20px;
+  padding: 8px 18px;
   border-radius: 999px;
   cursor: pointer;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   z-index: 100001;
 }
 
 .intro-skip-btn:hover {
-  background: rgba(212, 175, 55, 0.22);
-  border-color: var(--gold-bright);
-  color: var(--gold-bright);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.3);
+  color: #1a1918;
   transform: translateY(-1px);
 }
 
-/* Plain Same Color Wax Seal Interactive Center Target */
+/* Central Wax Seal Interactive Target */
 .wax-seal-center-target {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 260px;
-  height: 290px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,71 +96,69 @@
   z-index: 10;
 }
 
-/* External Golden Ring Ripple (outside the seal - NEVER discolors the wax) */
+/* Subtle Pearl Ring Ripple around the central seal */
 .wax-seal-outer-ripple {
   position: absolute;
-  inset: -14px;
+  inset: -8px;
   border-radius: 50%;
-  border: 2px solid rgba(212, 175, 55, 0.55);
+  border: 1.5px solid rgba(160, 160, 175, 0.45);
   opacity: 0;
   pointer-events: none;
-  animation: outerRipple 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  animation: pearlRipple 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
 }
 
-@keyframes outerRipple {
+@keyframes pearlRipple {
   0% {
-    transform: scale(0.85);
-    opacity: 0.85;
-    border-color: rgba(255, 215, 0, 0.8);
+    transform: scale(0.92);
+    opacity: 0.75;
+    border-color: rgba(190, 190, 205, 0.65);
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.35;
   }
   100% {
-    transform: scale(1.35);
+    transform: scale(1.28);
     opacity: 0;
-    border-color: rgba(212, 175, 55, 0);
+    border-color: rgba(190, 190, 205, 0);
   }
 }
 
-/* Bottom Hint & Cue */
+/* Bottom Hint & Cue positioned directly under the seal */
 .wax-envelope-footer {
+  position: absolute;
+  top: calc(50% + 108px);
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
-  color: var(--ivory-warm);
   pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
   z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.wax-envelope-fullpage.opened .wax-envelope-footer {
+  opacity: 0;
 }
 
 .wax-envelope-cue-text {
-  font-family: var(--font-serif);
-  font-size: 13px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #fff4db;
-  text-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.9),
-    0 0 16px rgba(212, 175, 55, 0.5);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.wax-envelope-cue-text span {
-  color: var(--gold-bright);
-}
-
-.wax-envelope-cue-hint {
-  font-family: var(--font-script);
-  font-size: 20px;
-  letter-spacing: 0.08em;
-  color: var(--ivory-warm);
-  opacity: 0.95;
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-size: 17px;
   font-style: italic;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #23211f;
+  display: inline-block;
+  animation: cuePulse 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes cuePulse {
+  0% {
+    opacity: 0.65;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateY(-2px);
+  }
 }
 
 /* =========================================================
