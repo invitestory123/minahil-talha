@@ -54,10 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (envelopeOverlay) {
-      envelopeOverlay.classList.add('opened');
+      // Step 1: Trigger 3D flap opening and card slide animation
+      envelopeOverlay.classList.add('opening');
+
+      // Step 2: Smoothly zoom and dissolve into the interactive first page hero
+      setTimeout(() => {
+        envelopeOverlay.classList.add('opened');
+      }, 950);
+
+      // Step 3: Remove overlay from DOM flow
       setTimeout(() => {
         envelopeOverlay.style.display = 'none';
-      }, 900);
+      }, 1700);
     }
     
     // Unlock body scroll

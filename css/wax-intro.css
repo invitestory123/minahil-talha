@@ -20,7 +20,7 @@
 
 /* =========================================================
    1. ROYAL WAX SEAL ENVELOPE INTRO (FULL PAGE)
-   Exact White Embossed Floral Envelope as shown in mobile video
+   Pure White Embossed Floral Envelope with 3D Opening Animation
    ========================================================= */
 .wax-envelope-fullpage {
   position: fixed;
@@ -29,39 +29,278 @@
   height: 100vh;
   height: 100svh;
   z-index: 99999;
-  background-color: #f7f6f4;
-  background-image: url('../editable/assets/white-envelope-cover.png');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #fbfbfa;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 24px 20px 40px;
-  box-sizing: border-box;
-  cursor: pointer;
+  justify-content: center;
   overflow: hidden;
-  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), filter 0.85s ease, visibility 0.85s;
+  cursor: pointer;
+  transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1), transform 0.75s cubic-bezier(0.4, 0, 0.2, 1), filter 0.75s ease, visibility 0.75s;
 }
 
 .wax-envelope-fullpage.opened {
   opacity: 0;
-  transform: scale(1.06);
+  transform: scale(1.08);
   filter: blur(4px);
   visibility: hidden;
   pointer-events: none;
 }
 
-/* Top Skip Button */
-.intro-skip-btn {
-  align-self: flex-end;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  color: #3e3b38;
+/* 3D Envelope Presentation Stage */
+.envelope-3d-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  perspective: 1400px;
+  overflow: hidden;
+  background: #fdfdfc;
+}
+
+/* Interior Back of Envelope */
+.env-back-interior {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 35%, #ffffff 0%, #f6f5f2 70%, #edeae3 100%);
+  z-index: 1;
+}
+
+/* Royal Velvet Invitation Card Sliding Out */
+.envelope-card-reveal {
+  position: absolute;
+  top: 26%;
+  left: 6%;
+  right: 6%;
+  height: 54%;
+  max-width: 420px;
+  margin: 0 auto;
+  background: linear-gradient(175deg, #24050e 0%, #3a0816 55%, #1a030a 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.75);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  transform: translateY(20px) scale(0.96);
+  opacity: 0.95;
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.9s ease, opacity 0.5s ease;
+}
+
+.wax-envelope-fullpage.opening .envelope-card-reveal {
+  opacity: 1;
+  transform: translateY(-120px) scale(1.05);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.65);
+  transition-delay: 0.2s;
+}
+
+.card-inner-frame {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 10px;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff4db;
+}
+
+.card-bismillah-arabic {
+  font-family: var(--font-arabic);
+  font-size: 21px;
+  color: #f7d26d;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.card-couple-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.card-couple-title span {
+  color: #f7d26d;
+}
+
+.card-event-badge {
   font-family: var(--font-sans);
   font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #f7d26d;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  margin-bottom: 14px;
+}
+
+.card-date-venue {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: #eae5d9;
+  line-height: 1.6;
+}
+
+/* Lower Pocket (covers bottom half of card) */
+.envelope-pocket-lower {
+  position: absolute;
+  inset: 0;
+  background-image: url('../editable/assets/env-pocket-clean.png');
+  background-size: cover;
+  background-position: center center;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* 3D Flap Container */
+.envelope-flap-3d {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  transform-origin: 50% 29.426%;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.35, 0, 0.15, 1);
+  pointer-events: none;
+}
+
+.flap-face-front {
+  position: absolute;
+  inset: 0;
+  background-image: url('../editable/assets/env-flap-front.png');
+  background-size: cover;
+  background-position: center center;
+  backface-visibility: hidden;
+}
+
+.flap-face-back {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 29.426%, 100% 29.426%, 50% 59.61%);
+  background: linear-gradient(180deg, #edeae3 0%, #faf9f6 40%, #ffffff 100%);
+  transform: rotateX(180deg);
+  transform-origin: 50% 29.426%;
+  backface-visibility: hidden;
+  box-shadow: inset 0 -4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.wax-envelope-fullpage.opening .envelope-flap-3d {
+  transform: rotateX(180deg);
+}
+
+/* Center Interactive Pearl Wax Seal Target */
+.wax-seal-center-target {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+}
+
+.wax-seal-outer-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(200, 200, 215, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  animation: pearlRipple 2.6s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes pearlRipple {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.28);
+    opacity: 0;
+  }
+}
+
+.wax-envelope-fullpage.opening .wax-seal-center-target {
+  transform: translate(-50%, -50%) scale(1.2) rotate(6deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Bottom Hint & Cue positioned directly under the seal */
+.wax-envelope-footer {
+  position: absolute;
+  top: calc(50% + 115px);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.25s ease;
+}
+
+.wax-envelope-cue-text {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-style: italic;
   font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #2b2725;
+  display: inline-block;
+  opacity: 0.85;
+  animation: cueFloat 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes cueFloat {
+  0% {
+    opacity: 0.75;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+.wax-envelope-fullpage.opening .wax-envelope-footer {
+  opacity: 0;
+  display: none;
+}
+
+.wax-envelope-fullpage.opening .wax-envelope-cue-text {
+  animation: none;
+}
+
+/* Top Skip Button */
+.intro-skip-btn {
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #2c2826;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 8px 18px;
@@ -74,91 +313,10 @@
 }
 
 .intro-skip-btn:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(0, 0, 0, 0.3);
-  color: #1a1918;
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.25);
+  color: #111;
   transform: translateY(-1px);
-}
-
-/* Central Wax Seal Interactive Target */
-.wax-seal-center-target {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-}
-
-/* Subtle Pearl Ring Ripple around the central seal */
-.wax-seal-outer-ripple {
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(160, 160, 175, 0.45);
-  opacity: 0;
-  pointer-events: none;
-  animation: pearlRipple 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
-}
-
-@keyframes pearlRipple {
-  0% {
-    transform: scale(0.92);
-    opacity: 0.75;
-    border-color: rgba(190, 190, 205, 0.65);
-  }
-  50% {
-    opacity: 0.35;
-  }
-  100% {
-    transform: scale(1.28);
-    opacity: 0;
-    border-color: rgba(190, 190, 205, 0);
-  }
-}
-
-/* Bottom Hint & Cue positioned directly under the seal */
-.wax-envelope-footer {
-  position: absolute;
-  top: calc(50% + 108px);
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  pointer-events: none;
-  z-index: 10;
-  transition: opacity 0.3s ease;
-}
-
-.wax-envelope-fullpage.opened .wax-envelope-footer {
-  opacity: 0;
-}
-
-.wax-envelope-cue-text {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  font-size: 17px;
-  font-style: italic;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: #23211f;
-  display: inline-block;
-  animation: cuePulse 2.4s ease-in-out infinite alternate;
-}
-
-@keyframes cuePulse {
-  0% {
-    opacity: 0.65;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0.95;
-    transform: translateY(-2px);
-  }
 }
 
 /* =========================================================
