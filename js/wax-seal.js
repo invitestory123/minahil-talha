@@ -55,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (envelopeOverlay) {
       envelopeOverlay.classList.add('opened');
+      setTimeout(() => {
+        envelopeOverlay.style.display = 'none';
+      }, 900);
     }
     
     // Unlock body scroll
@@ -88,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Support direct opened link
   if (window.location.search.includes('opened=true') && envelopeOverlay) {
     envelopeOverlay.classList.add('opened');
+    envelopeOverlay.style.display = 'none';
     document.body.classList.remove('intro-locked');
   }
 
