@@ -151,30 +151,94 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('intro-locked');
   }
 
-  // Floating Gold Particles Canvas on Hero
+  // Atmospheric Gold Embers, Fireflies & Twinkling Stars Canvas on Hero
   const canvas = document.getElementById('heroParticlesCanvas');
-  if (canvas) {
+  const heroSection = document.getElementById('hero');
+
+  if (canvas && heroSection) {
     const ctx = canvas.getContext('2d');
-    let width = canvas.width = canvas.parentElement.offsetWidth || window.innerWidth;
-    let height = canvas.height = canvas.parentElement.offsetHeight || window.innerHeight;
+    let width = (canvas.width = heroSection.offsetWidth || window.innerWidth);
+    let height = (canvas.height = heroSection.offsetHeight || window.innerHeight);
+
+    let mouseX = -9999;
+    let mouseY = -9999;
+
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+      mouseX = -9999;
+      mouseY = -9999;
+    });
+
+    heroSection.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches[0]) {
+        const rect = heroSection.getBoundingClientRect();
+        mouseX = e.touches[0].clientX - rect.left;
+        mouseY = e.touches[0].clientY - rect.top;
+      }
+    }, { passive: true });
+
+    heroSection.addEventListener('touchend', () => {
+      mouseX = -9999;
+      mouseY = -9999;
+    });
 
     window.addEventListener('resize', () => {
-      width = canvas.width = canvas.parentElement.offsetWidth || window.innerWidth;
-      height = canvas.height = canvas.parentElement.offsetHeight || window.innerHeight;
+      width = canvas.width = heroSection.offsetWidth || window.innerWidth;
+      height = canvas.height = heroSection.offsetHeight || window.innerHeight;
     });
 
     const particles = [];
-    const count = Math.min(width > 600 ? 42 : 24, 50);
+    const count = Math.min(width > 600 ? 55 : 36, 60);
 
     for (let i = 0; i < count; i++) {
+      const typeRand = Math.random();
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        r: Math.random() * 2.2 + 0.6,
-        opacity: Math.random() * 0.7 + 0.2,
-        speedY: Math.random() * 0.45 + 0.15,
-        speedX: (Math.random() - 0.5) * 0.2
+        baseR: typeRand > 0.85 ? Math.random() * 2.8 + 1.2 : Math.random() * 1.8 + 0.6,
+        baseAlpha: Math.random() * 0.55 + 0.25,
+        alpha: 0.5,
+        speedY: Math.random() * 0.55 + 0.18,
+        speedX: (Math.random() - 0.5) * 0.25,
+        wobble: Math.random() * Math.PI * 2,
+        wobbleSpeed: Math.random() * 0.04 + 0.015,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: Math.random() * 0.05 + 0.02,
+        isStar: typeRand > 0.75,
+        starSize: Math.random() * 3.5 + 2.0
       });
+    }
+
+    function drawSparkleStar(cx, cy, spikes, outerRadius, innerRadius, alpha) {
+      let rot = Math.PI / 2 * 3;
+      let x = cx;
+      let y = cy;
+      const step = Math.PI / spikes;
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - outerRadius);
+      for (let i = 0; i < spikes; i++) {
+        x = cx + Math.cos(rot) * outerRadius;
+        y = cy + Math.sin(rot) * outerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
+
+        x = cx + Math.cos(rot) * innerRadius;
+        y = cy + Math.sin(rot) * innerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
+      }
+      ctx.lineTo(cx, cy - outerRadius);
+      ctx.closePath();
+      ctx.fillStyle = `rgba(255, 235, 150, ${alpha})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = '#ffd700';
+      ctx.fill();
     }
 
     function animateParticles() {
@@ -182,26 +246,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
       for (let i = 0; i < count; i++) {
         const p = particles[i];
-        p.y -= p.speedY;
-        p.x += p.speedX;
+        p.wobble += p.wobbleSpeed;
+        p.pulse += p.pulseSpeed;
 
-        if (p.y < 0) {
-          p.y = height + 5;
-          p.x = Math.random() * width;
+        p.y -= p.speedY;
+        p.x += p.speedX + Math.sin(p.wobble) * 0.35;
+
+        // Interactive cursor repulsion
+        const dx = p.x - mouseX;
+        const dy = p.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 80 && dist > 0) {
+          const force = (80 - dist) / 80;
+          p.x += (dx / dist) * force * 2.5;
+          p.y += (dy / dist) * force * 2.5;
         }
 
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 215, 0, ${p.opacity})`;
-        ctx.shadowBlur = p.r * 3;
-        ctx.shadowColor = '#d4af37';
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
-        ctx.fill();
+        // Pulse alpha
+        p.alpha = Math.max(0.1, Math.min(1.0, p.baseAlpha + Math.sin(p.pulse) * 0.35));
+
+        // Recycle particle
+        if (p.y < -10) {
+          p.y = height + 10;
+          p.x = Math.random() * width;
+        }
+        if (p.x < -10) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
+
+        if (p.isStar && Math.sin(p.pulse) > 0.4) {
+          drawSparkleStar(p.x, p.y, 4, p.starSize * (0.8 + Math.sin(p.pulse) * 0.4), p.starSize * 0.25, p.alpha);
+        } else {
+          ctx.beginPath();
+          const r = p.baseR * (0.85 + Math.sin(p.pulse) * 0.2);
+          ctx.fillStyle = `rgba(255, 220, 110, ${p.alpha})`;
+          ctx.shadowBlur = r * 3.5;
+          ctx.shadowColor = '#d4af37';
+          ctx.arc(p.x, p.y, r, 0, Math.PI * 2, false);
+          ctx.fill();
+        }
       }
 
       requestAnimationFrame(animateParticles);
     }
 
     animateParticles();
+
+    // Subtle 3D Tilt / Parallax Motion
+    const heroBg = heroSection.querySelector('.hero-art-background');
+    const heroContent = heroSection.querySelector('.hero-sky-content');
+
+    if (heroBg && heroContent) {
+      let targetX = 0, targetY = 0;
+      let currentX = 0, currentY = 0;
+
+      heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        const normX = (e.clientX - rect.left) / rect.width - 0.5;
+        const normY = (e.clientY - rect.top) / rect.height - 0.5;
+        targetX = normX * 8;
+        targetY = normY * 6;
+      });
+
+      if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== 'function') {
+        window.addEventListener('deviceorientation', (e) => {
+          if (e.gamma !== null && e.beta !== null) {
+            targetX = Math.max(-8, Math.min(8, (e.gamma / 45) * 6));
+            targetY = Math.max(-6, Math.min(6, ((e.beta - 45) / 45) * 5));
+          }
+        }, { passive: true });
+      }
+
+      function updateParallax() {
+        currentX += (targetX - currentX) * 0.06;
+        currentY += (targetY - currentY) * 0.06;
+        heroBg.style.transform = `scale(1.04) translate(${currentX * -0.6}px, ${currentY * -0.6}px)`;
+        heroContent.style.transform = `translate(${currentX * 0.5}px, ${currentY * 0.5}px)`;
+        requestAnimationFrame(updateParallax);
+      }
+      updateParallax();
+    }
   }
 
   // Copy Address Toast

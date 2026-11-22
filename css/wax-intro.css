@@ -333,7 +333,7 @@
 }
 
 /* =========================================================
-   2. HERO FIRST PAGE
+   2. HERO FIRST PAGE (CINEMATIC LIVING ANIMATION)
    ========================================================= */
 .hero-first-page {
   position: relative;
@@ -346,27 +346,110 @@
   background-color: #2a050c;
   overflow: hidden;
   box-sizing: border-box;
+  perspective: 1000px;
 }
 
-.hero-art-background {
+/* Background Artwork Wrapper & Ken Burns Cinematic Living Motion */
+.hero-art-wrapper {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  overflow: hidden;
   z-index: 0;
-  filter: brightness(0.97) contrast(1.03);
+  pointer-events: none;
+}
+
+.hero-art-background {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center 38%;
+  filter: brightness(0.98) contrast(1.04);
+  transform-origin: 50% 42%;
+  animation: heroCinematicBreathe 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroCinematicBreathe {
+  0% {
+    transform: scale(1.0) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.06) translate(-1%, -1.2%);
+  }
+  100% {
+    transform: scale(1.01) translate(0.8%, -0.4%);
+  }
 }
 
 .hero-art-scrim {
   position: absolute;
   inset: 0;
   background: 
-    linear-gradient(to bottom, rgba(42, 5, 12, 0.72) 0%, rgba(42, 5, 12, 0.35) 26%, rgba(42, 5, 12, 0.08) 52%, rgba(42, 5, 12, 0.82) 100%),
-    radial-gradient(circle at 50% 18%, rgba(212, 175, 55, 0.16) 0%, transparent 65%);
+    linear-gradient(to bottom, rgba(42, 5, 12, 0.74) 0%, rgba(42, 5, 12, 0.36) 26%, rgba(42, 5, 12, 0.08) 52%, rgba(42, 5, 12, 0.85) 100%),
+    radial-gradient(circle at 50% 18%, rgba(212, 175, 55, 0.18) 0%, transparent 65%);
   z-index: 1;
   pointer-events: none;
+}
+
+/* Palace Chandelier & Lighting Warm Candlelit Pulse */
+.hero-palace-glow {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(340px, 85vw);
+  height: min(340px, 85vw);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 218, 130, 0.32) 0%, rgba(212, 175, 55, 0.14) 42%, transparent 74%);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+  animation: chandelierFlicker 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes chandelierFlicker {
+  0% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(0.94);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.01);
+  }
+}
+
+/* Sky Twilight Golden Aura */
+.hero-sky-aura {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 520px;
+  height: 200px;
+  background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.22) 0%, rgba(247, 210, 109, 0.08) 50%, transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+  animation: skyAuraPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes skyAuraPulse {
+  0% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
 }
 
 .particles-canvas {
@@ -447,16 +530,29 @@
   align-items: center;
   gap: 6px;
   padding-top: 12px;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Staggered Cinematic Reveal & Shimmer Animations */
 .hero-bismillah {
   font-family: var(--font-arabic);
-  font-size: 25px;
+  font-size: 26px;
   line-height: 1.4;
   color: var(--gold-bright);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
   letter-spacing: 0.04em;
   margin-bottom: 2px;
+  display: inline-block;
+  animation: heroFadeDown 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both, bismillahGlow 4s ease-in-out infinite alternate 1.2s;
+}
+
+@keyframes bismillahGlow {
+  0% {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+  }
+  100% {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 215, 0, 0.9));
+  }
 }
 
 .hero-grace-line {
@@ -466,6 +562,7 @@
   color: var(--ivory-warm);
   opacity: 0.95;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  animation: heroFadeDown 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
 }
 
 .hero-couple-headline {
@@ -476,6 +573,7 @@
   gap: 0px;
 }
 
+/* 24K Gold Foil Shimmer Sweep on Names */
 .hero-bride-name,
 .hero-groom-name {
   font-family: var(--font-serif);
@@ -483,11 +581,37 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #fff6e0;
-  text-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.85),
-    0 0 22px rgba(212, 175, 55, 0.45);
+  background: linear-gradient(
+    130deg,
+    #ffffff 0%,
+    #fff4d6 20%,
+    #e8c86d 40%,
+    #ffffff 54%,
+    #ffd700 75%,
+    #fff4d6 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.45));
   line-height: 1.25;
+  animation: heroNameReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both, goldFoilSweep 6s ease-in-out infinite 1.7s;
+}
+
+.hero-groom-name {
+  animation: heroNameReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both, goldFoilSweep 6s ease-in-out infinite 2.1s;
+}
+
+@keyframes goldFoilSweep {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
 }
 
 .hero-ampersand {
@@ -496,7 +620,73 @@
   font-style: italic;
   color: var(--gold-bright);
   margin: 2px 0;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  display: inline-block;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 215, 0, 0.6);
+  animation: heroPopGlow 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s both, ampersandPulse 3.2s ease-in-out infinite alternate 1.7s;
+}
+
+@keyframes ampersandPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.5));
+  }
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 18px rgba(255, 215, 0, 0.9));
+  }
+}
+
+/* Barat Ceremony Badge with Border Light Sweep & Radiant Pulse */
+.hero-event-tag {
+  display: inline-block;
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff4db;
+  background: linear-gradient(135deg, rgba(62, 10, 20, 0.85), rgba(28, 4, 8, 0.92));
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  border-radius: 999px;
+  padding: 5px 18px;
+  margin-top: 6px;
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 10px rgba(212, 175, 55, 0.3);
+  animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both, badgeGlowPulse 3.5s ease-in-out infinite alternate 2.1s;
+}
+
+.hero-event-tag::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: rotate(25deg);
+  animation: badgeLightSweep 4.5s ease-in-out infinite;
+}
+
+@keyframes badgeLightSweep {
+  0%, 65% {
+    left: -75%;
+  }
+  100% {
+    left: 175%;
+  }
+}
+
+@keyframes badgeGlowPulse {
+  0% {
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 8px rgba(212, 175, 55, 0.25);
+  }
+  100% {
+    border-color: rgba(255, 215, 0, 0.9);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.65);
+  }
 }
 
 .hero-date-line {
@@ -510,25 +700,10 @@
     0 2px 8px rgba(0, 0, 0, 0.95),
     0 0 12px rgba(42, 5, 12, 0.9);
   margin-top: 6px;
+  animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 1.3s both;
 }
 
-.hero-event-tag {
-  display: inline-block;
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ivory-cream);
-  background: rgba(42, 5, 12, 0.70);
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  border-radius: 999px;
-  padding: 4px 16px;
-  margin-top: 4px;
-  backdrop-filter: blur(6px);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-}
-
+/* Scroll Cue with Floating Bounce & Light Indicator */
 .hero-scroll-cue {
   position: relative;
   z-index: 3;
@@ -545,6 +720,7 @@
   opacity: 0.9;
   transition: all 0.3s ease;
   padding-bottom: 8px;
+  animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 1.5s both, scrollCueFloat 2.6s ease-in-out infinite alternate 2.5s;
 }
 
 .hero-scroll-cue:hover {
@@ -559,6 +735,7 @@
   border: 1.5px solid var(--gold-antique);
   border-radius: 999px;
   position: relative;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .hero-scroll-cue i::before {
@@ -571,6 +748,7 @@
   height: 5px;
   background: var(--gold-bright);
   border-radius: 999px;
+  box-shadow: 0 0 6px var(--gold-bright);
   animation: mouseWheel 1.6s ease-in-out infinite;
 }
 
@@ -578,6 +756,80 @@
   0% { transform: translate(-50%, 0); opacity: 0; }
   40% { opacity: 1; }
   100% { transform: translate(-50%, 8px); opacity: 0; }
+}
+
+@keyframes scrollCueFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-7px);
+  }
+}
+
+/* Bottom Floral Divider Subtle Floating Sway */
+.floral-divider img {
+  animation: floralSway 5.5s ease-in-out infinite alternate;
+  transform-origin: center top;
+}
+
+@keyframes floralSway {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -4px) scale(1.015);
+  }
+}
+
+/* Keyframe Animations for Staggered Entrance */
+@keyframes heroFadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroNameReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+    letter-spacing: 0.26em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    letter-spacing: 0.18em;
+  }
+}
+
+@keyframes heroPopGlow {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  70% {
+    transform: scale(1.25);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* =========================================================
