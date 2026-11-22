@@ -42,8 +42,8 @@ window.INVITATION_CONFIG = {
     "calendarEvent": "Barat Ceremony — Dr. Minahil & Muhammad Talha"
   },
   "media": {
-    "introVideo": "",
-    "introPoster": "editable/assets/envelope-cover.png",
+    "introVideo": "editable/assets/intro-envelope.mp4",
+    "introPoster": "editable/assets/intro-poster.jpg",
     "music": "editable/assets/bgm.mp3",
     "coupleHero": "editable/assets/modest-couple-hero.jpg",
     "seal": "editable/assets/tm-shield-seal.png"

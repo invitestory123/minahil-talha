@@ -39,6 +39,19 @@
   transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1), transform 0.75s cubic-bezier(0.4, 0, 0.2, 1), filter 0.75s ease, visibility 0.75s;
 }
 
+.intro-envelope-video {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 1;
+  pointer-events: none;
+  background-color: #fbfbfa;
+}
+
 .wax-envelope-fullpage.opened {
   opacity: 0;
   transform: scale(1.08);

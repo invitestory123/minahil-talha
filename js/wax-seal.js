@@ -33,45 +33,28 @@ document.addEventListener('DOMContentLoaded', () => {
     musicToggle.addEventListener('click', toggleMusic);
   }
 
-  // Royal Wax Seal Envelope Opening Interaction
+  // Royal Wax Seal Envelope Opening Video Interaction
   const envelopeOverlay = document.getElementById('envelopeOverlay');
+  const introVideo = document.getElementById('introEnvelopeVideo');
   const openSealBtn = document.getElementById('openSealBtn');
   const skipIntroBtn = document.getElementById('skipIntroBtn');
 
   let isOpening = false;
+  let hasOpened = false;
 
-  function openEnvelope() {
-    if (isOpening) return;
-    isOpening = true;
-
-    // Trigger background audio automatically on user gesture
-    if (audio && audio.paused) {
-      audio.play().then(() => {
-        isPlaying = true;
-        if (musicToggle) musicToggle.classList.remove('paused');
-        if (musicLabel) musicLabel.textContent = 'Sound';
-      }).catch(() => {});
-    }
+  function finishIntro() {
+    if (hasOpened) return;
+    hasOpened = true;
 
     if (envelopeOverlay) {
-      // Step 1: Trigger 3D flap opening and card slide animation
-      envelopeOverlay.classList.add('opening');
-
-      // Step 2: Smoothly zoom and dissolve into the interactive first page hero
-      setTimeout(() => {
-        envelopeOverlay.classList.add('opened');
-      }, 950);
-
-      // Step 3: Remove overlay from DOM flow
+      envelopeOverlay.classList.add('opened');
       setTimeout(() => {
         envelopeOverlay.style.display = 'none';
-      }, 1700);
+      }, 750);
     }
-    
+
     // Unlock body scroll
     document.body.classList.remove('intro-locked');
-
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     // Trigger resize event after opening so scratch card canvas gets exact dimensions
@@ -80,13 +63,78 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 150);
   }
 
+  function openEnvelope() {
+    if (isOpening) {
+      finishIntro();
+      return;
+    }
+    isOpening = true;
+
+    // Trigger background audio automatically on user gesture
+    if (audio && audio.paused) {
+      audio.play().then(() => {
+        isPlaying = true;
+        if (musicToggle) musicToggle.classList.remove('paused');
+        if (musicLabel) musicLabel.textContent = 'Sound';
+      }).catch(err => {
+        console.log('Audio playback interaction needed:', err);
+      });
+    }
+
+    if (envelopeOverlay) {
+      envelopeOverlay.classList.add('opening');
+    }
+
+    // Play intro video
+    if (introVideo) {
+      introVideo.muted = false;
+      const playPromise = introVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(e => {
+          console.log('Video play error (fallback to muted):', e);
+          introVideo.muted = true;
+          introVideo.play().catch(() => {});
+        });
+      }
+
+      // Synchronize dissolve with the golden light burst (around 2.35s)
+      const onTimeUpdate = () => {
+        if (introVideo.currentTime >= 2.35) {
+          introVideo.removeEventListener('timeupdate', onTimeUpdate);
+          finishIntro();
+        }
+      };
+      introVideo.addEventListener('timeupdate', onTimeUpdate);
+      introVideo.addEventListener('ended', finishIntro);
+    }
+
+    // Fallback safety timeout if timeupdate does not fire
+    setTimeout(() => {
+      finishIntro();
+    }, 2500);
+  }
+
+  function skipIntro() {
+    finishIntro();
+    if (audio && audio.paused) {
+      audio.play().then(() => {
+        isPlaying = true;
+        if (musicToggle) musicToggle.classList.remove('paused');
+        if (musicLabel) musicLabel.textContent = 'Sound';
+      }).catch(() => {});
+    }
+  }
+
   if (openSealBtn) {
-    openSealBtn.addEventListener('click', openEnvelope);
+    openSealBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openEnvelope();
+    });
   }
   if (skipIntroBtn) {
     skipIntroBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      openEnvelope();
+      skipIntro();
     });
   }
   if (envelopeOverlay) {

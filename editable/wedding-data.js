@@ -31,7 +31,8 @@ window.WEDDING_DATA = {
     verseRef: "Surah Ar-Rum (30:21)"
   },
   media: {
-    envelopeCover: "editable/assets/envelope-cover.png",
+    introVideo: "editable/assets/intro-envelope.mp4",
+    envelopeCover: "editable/assets/intro-poster.jpg",
     seal: "editable/assets/tm-shield-seal.png",
     photo: "editable/assets/modest-couple-hero.jpg",
     music: "editable/assets/bgm.mp3"

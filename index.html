@@ -58,45 +58,27 @@
 
     <!-- =======================================================
          1. ROYAL WAX SEAL ENVELOPE INTRO (FULL PAGE)
-         Pure White Embossed Floral Envelope with 3D Opening Animation
+         Pure White Embossed Floral Envelope Opening Video Intro
          ======================================================= -->
     <div id="envelopeOverlay" class="wax-envelope-fullpage" role="button" tabindex="0" aria-label="Tap to open wedding invitation">
-      <button id="skipIntroBtn" class="intro-skip-btn" type="button">SKIP</button>
+      <!-- Fullscreen Video Element -->
+      <video
+        id="introEnvelopeVideo"
+        class="intro-envelope-video"
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        poster="editable/assets/intro-poster.jpg"
+        src="editable/assets/intro-envelope.mp4"
+      ></video>
 
-      <!-- 3D Envelope Presentation Stage -->
-      <div class="envelope-3d-stage">
-        <!-- Interior Back of Envelope -->
-        <div class="env-back-interior"></div>
+      <!-- Clickable Top-Right SKIP Button Overlay -->
+      <button id="skipIntroBtn" class="intro-skip-btn" type="button" aria-label="Skip intro">SKIP</button>
 
-        <!-- Royal Velvet Invitation Card (slides up out of pocket) -->
-        <div class="envelope-card-reveal" aria-hidden="true">
-          <div class="card-inner-frame">
-            <div class="card-bismillah-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-            <div class="card-couple-title">Dr. Minahil <span>&amp;</span> Muhammad Talha</div>
-            <div class="card-event-badge">BARAT CEREMONY</div>
-            <div class="card-date-venue">11 &bull; JANUARY &bull; 2027<br>Marquesina by TOPAZ, Lahore</div>
-          </div>
-        </div>
-
-        <!-- Lower Envelope Pocket (holds card) -->
-        <div class="envelope-pocket-lower"></div>
-
-        <!-- 3D Upper Flap (folds upward) -->
-        <div class="envelope-flap-3d">
-          <div class="flap-face-front"></div>
-          <div class="flap-face-back"></div>
-        </div>
-
-        <!-- Center Interactive Pearl Wax Seal Target -->
-        <div id="openSealBtn" class="wax-seal-center-target" role="button" tabindex="0" aria-label="Break seal to open invitation">
-          <div class="wax-seal-outer-ripple"></div>
-          <div class="seal-glow-flash"></div>
-        </div>
-
-        <!-- "Tap to open" cue text positioned below seal -->
-        <div class="wax-envelope-footer">
-          <div class="wax-envelope-cue-text">Tap to open</div>
-        </div>
+      <!-- Center Interactive Wax Seal Tap Target with Ripple -->
+      <div id="openSealBtn" class="wax-seal-center-target" role="button" tabindex="0" aria-label="Break seal to open invitation">
+        <div class="wax-seal-outer-ripple"></div>
+        <div class="seal-glow-flash"></div>
       </div>
     </div>
 
