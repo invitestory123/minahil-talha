@@ -172,7 +172,7 @@
   position: absolute;
   inset: 0;
   z-index: 4;
-  transform-origin: 50% 29.426%;
+  transform-origin: 50% 27.645%;
   transform-style: preserve-3d;
   transition: transform 0.85s cubic-bezier(0.35, 0, 0.15, 1);
   pointer-events: none;
@@ -190,10 +190,10 @@
 .flap-face-back {
   position: absolute;
   inset: 0;
-  clip-path: polygon(0 29.426%, 100% 29.426%, 50% 59.61%);
+  clip-path: polygon(0 27.645%, 100% 27.645%, 50% 56.006%);
   background: linear-gradient(180deg, #edeae3 0%, #faf9f6 40%, #ffffff 100%);
   transform: rotateX(180deg);
-  transform-origin: 50% 29.426%;
+  transform-origin: 50% 27.645%;
   backface-visibility: hidden;
   box-shadow: inset 0 -4px 12px rgba(0, 0, 0, 0.08);
 }
