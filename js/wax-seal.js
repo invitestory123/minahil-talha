@@ -33,9 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     musicToggle.addEventListener('click', toggleMusic);
   }
 
-  // Royal Wax Seal Envelope Opening Video Interaction
+  // Royal Ruby Velvet Wax Seal Envelope Opening 3D Interaction
   const envelopeOverlay = document.getElementById('envelopeOverlay');
-  const introVideo = document.getElementById('introEnvelopeVideo');
   const openSealBtn = document.getElementById('openSealBtn');
   const skipIntroBtn = document.getElementById('skipIntroBtn');
 
@@ -85,33 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
       envelopeOverlay.classList.add('opening');
     }
 
-    // Play intro video
-    if (introVideo) {
-      introVideo.muted = false;
-      const playPromise = introVideo.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(e => {
-          console.log('Video play error (fallback to muted):', e);
-          introVideo.muted = true;
-          introVideo.play().catch(() => {});
-        });
-      }
-
-      // Synchronize dissolve with the golden light burst (around 2.35s)
-      const onTimeUpdate = () => {
-        if (introVideo.currentTime >= 2.35) {
-          introVideo.removeEventListener('timeupdate', onTimeUpdate);
-          finishIntro();
-        }
-      };
-      introVideo.addEventListener('timeupdate', onTimeUpdate);
-      introVideo.addEventListener('ended', finishIntro);
-    }
-
-    // Fallback safety timeout if timeupdate does not fire
+    // Allow user to appreciate the 3D flap unfolding and card slide-up (1.6s), then smoothly dissolve into hero
     setTimeout(() => {
       finishIntro();
-    }, 2500);
+    }, 1600);
   }
 
   function skipIntro() {
