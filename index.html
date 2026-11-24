@@ -57,8 +57,8 @@
     </button>
 
     <!-- =======================================================
-         1. ROYAL WAX SEAL INTRO (new animated opening)
-         Ruby velvet cover + gold seal press → golden light burst → reveal
+         1. ROYAL WAX SEAL ENVELOPE INTRO
+         Ruby Velvet MT Monogram Crest Envelope Opening (wax-seal-royale style)
          ======================================================= -->
     <div id="weiOverlay" role="button" tabindex="0" aria-label="Tap to open wedding invitation">
       <button id="skipIntroBtn" class="intro-skip-btn" type="button" aria-label="Skip intro">SKIP</button>
@@ -72,16 +72,22 @@
         draggable="false"
       />
 
-      <div class="wei-dust" id="weiDust" aria-hidden="true"></div>
-
-      <div class="wei-seal-halo" aria-hidden="true"><i></i><i></i></div>
-      <div class="wei-burst" aria-hidden="true"></div>
-
       <div id="weiTapWrap">
         <div class="wei-chevron"></div>
         <div id="weiTapLabel">Tap to open</div>
         <div class="wei-sublabel">Dr. Minahil &bull; Muhammad Talha</div>
       </div>
+    </div>
+
+    <div id="weiVideoWrap" aria-hidden="true">
+      <button id="skipVideoBtn" class="intro-skip-btn" type="button" aria-label="Skip intro">SKIP</button>
+      <video
+        id="weiVideo"
+        src="editable/assets/intro-envelope.mp4"
+        muted
+        playsinline
+        preload="auto"
+      ></video>
     </div>
 
     <!-- =======================================================
