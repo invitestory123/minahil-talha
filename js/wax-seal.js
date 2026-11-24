@@ -120,9 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
       overlay.style.display = 'none';
     }
 
-    // Unlock body scroll and trigger hero section
+    // Unlock body scroll and reveal invitation
     document.body.classList.remove('intro-locked');
+    document.body.classList.add('intro-opened');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Show floating audio button with smooth fade
+    if (musicToggle) {
+      musicToggle.style.visibility = 'visible';
+      musicToggle.style.opacity = '1';
+      musicToggle.style.pointerEvents = 'auto';
+    }
 
     // Trigger resize for scratch card canvas
     setTimeout(() => {
@@ -174,6 +182,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (overlay) overlay.style.display = 'none';
     if (videoWrap) videoWrap.style.display = 'none';
     document.body.classList.remove('intro-locked');
+    document.body.classList.add('intro-opened');
+    if (musicToggle) {
+      musicToggle.style.visibility = 'visible';
+      musicToggle.style.opacity = '1';
+      musicToggle.style.pointerEvents = 'auto';
+    }
   }
 
   // Atmospheric Gold Embers, Fireflies & Twinkling Stars Canvas on Hero

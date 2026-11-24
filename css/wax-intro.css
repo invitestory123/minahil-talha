@@ -22,6 +22,23 @@
    1. ROYAL WAX SEAL ENVELOPE INTRO (wax-seal-royale architecture)
    Ruby Velvet MT Monogram Crest Envelope Opening Animation
    ========================================================= */
+/* While intro envelope is unopened/opening, keep invitation hidden to prevent ghosting bleed */
+body.intro-locked #invitation {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#invitation {
+  transition: opacity 0.6s ease;
+}
+
+body.intro-opened #invitation {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 #weiOverlay {
   position: fixed;
   inset: 0;
@@ -483,9 +500,6 @@
   color: #ffffff;
   transform: translateY(-1px);
 }
-  color: #111;
-  transform: translateY(-1px);
-}
 
 /* =========================================================
    2. HERO FIRST PAGE (CINEMATIC LIVING ANIMATION)
@@ -617,13 +631,15 @@
   pointer-events: none;
 }
 
-/* Music Toggle */
+/* Music Toggle — positioned at bottom right, hidden until revealed */
 .music-toggle-btn {
   position: fixed;
-  top: 18px;
-  right: 18px;
+  bottom: 24px;
+  right: 20px;
+  top: auto;
+  left: auto;
   z-index: 9999;
-  background: rgba(42, 5, 12, 0.88);
+  background: rgba(42, 5, 12, 0.92);
   border: 1.5px solid var(--gold-antique);
   border-radius: 999px;
   padding: 8px 16px;
@@ -638,8 +654,18 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 14px var(--gold-glow);
-  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+body.intro-opened .music-toggle-btn {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .music-toggle-btn:hover {
@@ -1184,3 +1210,55 @@
   color: var(--gold-bright);
   transform: translateY(-2px);
 }
+
+/* Polished Closing Arch and Responsive Alignment Enhancements */
+.closing-section {
+  padding-bottom: 50px !important;
+}
+
+.closing-arch {
+  border-bottom: 1px solid color-mix(in srgb, var(--plum) 28%, transparent) !important;
+  border-radius: 200px 200px 20px 20px !important;
+  margin-bottom: 30px !important;
+  box-shadow: 0 10px 30px rgba(74, 11, 22, 0.08);
+}
+
+.closing-arch::before {
+  border-bottom: 1px solid color-mix(in srgb, var(--plum) 48%, transparent) !important;
+  border-radius: 190px 190px 14px 14px !important;
+}
+
+@media (max-width: 600px) {
+  .music-toggle-btn {
+    bottom: 20px;
+    right: 16px;
+    padding: 7px 14px;
+    font-size: 10px;
+  }
+
+  .countdown div {
+    padding: 14px 4px !important;
+  }
+
+  .countdown strong {
+    font-size: clamp(2.4rem, 10vw, 3.2rem) !important;
+  }
+
+  .countdown span {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .section-pad {
+    padding-top: 112px !important;
+    padding-bottom: 72px !important;
+  }
+
+  .welcome-copy h2,
+  .program-section .section-heading h2,
+  .scratch-section .section-heading h2,
+  .venue-card h2 {
+    margin-top: 8px !important;
+  }
+}
+

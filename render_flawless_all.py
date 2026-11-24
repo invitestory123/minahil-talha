@@ -53,8 +53,19 @@ def main():
         color_diff = r_clean - b_clean
 
         paper_weight = np.clip((0.20 - color_diff) / 0.06, 0.0, 1.0)
-        is_flame_core = (f_fl[:, :, 2] > 0.95) & (f_fl[:, :, 1] > 0.93) & (f_fl[:, :, 0] > 0.84)
+
+        # Flame core only exists when flame opens (idx >= 66) and strictly within flame bounds
+        if idx >= 66:
+            flame_region = np.zeros((h, w), dtype=bool)
+            flame_region[250:900, 200:520] = True
+            is_flame_core = (f_fl[:, :, 2] > 0.95) & (f_fl[:, :, 1] > 0.93) & (f_fl[:, :, 0] > 0.84) & flame_region
+        else:
+            is_flame_core = np.zeros((h, w), dtype=bool)
+
         paper_weight[is_flame_core] = 0.0
+        # Force top edge (y < 25) and bottom edge (y > h - 25) to be solid ruby velvet paper (no video edge bleed)
+        paper_weight[:25, :] = 1.0
+        paper_weight[-25:, :] = 1.0
         paper_weight = cv2.GaussianBlur(paper_weight, (9, 9), 0)[:, :, None]
 
         base = f_fl * (1.0 - paper_weight) + ruby_pure * paper_weight
@@ -79,8 +90,10 @@ def main():
 
         else:
             # Opening frames (idx >= 86):
-            # Pure flame & light burst overlay:
-            is_flame_glow = np.clip((color_diff - 0.20) / 0.10, 0.0, 1.0) * np.clip((f_fl[:, :, 2] - 0.45) / 0.15, 0.0, 1.0)
+            # Pure flame & light burst overlay restricted to flame aperture:
+            flame_region = np.zeros((h, w), dtype=bool)
+            flame_region[200:1000, 180:540] = True
+            is_flame_glow = np.clip((color_diff - 0.20) / 0.10, 0.0, 1.0) * np.clip((f_fl[:, :, 2] - 0.45) / 0.15, 0.0, 1.0) * flame_region
             flame_mask = np.clip(is_flame_glow + is_flame_core.astype(np.float32), 0.0, 1.0)
             flame_mask = cv2.GaussianBlur(flame_mask, (5, 5), 0)[:, :, None]
 
