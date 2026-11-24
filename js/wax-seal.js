@@ -39,56 +39,82 @@ document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.getElementById('weiOverlay');
   const videoWrap = document.getElementById('weiVideoWrap');
   const video = document.getElementById('weiVideo');
+  const tapWrap = document.getElementById('weiTapWrap');
   const skipIntroBtn = document.getElementById('skipIntroBtn');
   const skipVideoBtn = document.getElementById('skipVideoBtn');
 
   let hasOpened = false;
+  let isOpening = false;
 
   function startAudio() {
     if (!audio) return;
+    audio.volume = 1;
     audio.play().then(() => {
       isPlaying = true;
       if (musicToggle) musicToggle.classList.remove('paused');
       if (musicLabel) musicLabel.textContent = 'Sound';
     }).catch(err => {
-      console.log('Audio autoplay prevented:', err);
+      console.log('Audio autoplay info:', err);
     });
   }
 
-  function startVideo() {
-    if (hasOpened) return;
+  function startVideo(e) {
+    if (isOpening || hasOpened) return;
+    isOpening = true;
 
-    // Fade out unopened cover overlay
-    if (overlay) {
-      overlay.style.opacity = '0';
-      overlay.style.pointerEvents = 'none';
-      setTimeout(() => {
-        overlay.style.display = 'none';
-      }, 1400);
+    // Immediately fade out the cue/tap label
+    if (tapWrap) {
+      tapWrap.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+      tapWrap.style.opacity = '0';
+      tapWrap.style.transform = 'translateX(-50%) scale(0.92)';
     }
 
-    // Show and play video
-    if (videoWrap) videoWrap.classList.add('wei-video-in');
+    // Show video wrap immediately
+    if (videoWrap) {
+      videoWrap.classList.add('wei-video-in');
+    }
+
+    // Start background audio immediately within the user gesture
+    startAudio();
+
+    // Play video
     if (video) {
       const vp = video.play();
       if (vp && vp.catch) vp.catch(() => {});
-    }
 
-    // Start background music
-    startAudio();
+      let overlayHidden = false;
+      const hideOverlay = () => {
+        if (overlayHidden) return;
+        overlayHidden = true;
+        if (overlay) {
+          overlay.style.transition = 'opacity 0.35s ease';
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+          setTimeout(() => {
+            overlay.style.display = 'none';
+          }, 380);
+        }
+      };
+
+      video.addEventListener('playing', hideOverlay, { once: true });
+      // Fallback in case 'playing' is delayed
+      setTimeout(hideOverlay, 180);
+    } else if (overlay) {
+      overlay.style.display = 'none';
+    }
   }
 
   function finishIntro() {
     if (hasOpened) return;
     hasOpened = true;
 
-    // Fade out video wrap over 1.4s
+    // Smoothly fade out video wrap into the revealed hero page
     if (videoWrap) {
       videoWrap.classList.remove('wei-video-in');
       videoWrap.classList.add('wei-video-out');
       setTimeout(() => {
         videoWrap.style.display = 'none';
-      }, 1400);
+      }, 950);
     }
     if (overlay) {
       overlay.style.display = 'none';
@@ -105,7 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function skipIntro(e) {
-    if (e) e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     startAudio();
     if (video) {
       video.pause();
