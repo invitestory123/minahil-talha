@@ -173,8 +173,16 @@ document.addEventListener('DOMContentLoaded', () => {
     skipVideoBtn.addEventListener('touchstart', skipIntro, { passive: true });
   }
 
+  if (videoWrap) {
+    videoWrap.addEventListener('click', (e) => {
+      if (!e.target.closest('#skipVideoBtn')) {
+        skipIntro(e);
+      }
+    });
+  }
+
   if (video) {
-    // Fade video as flap reveals card (duration is ~1.68s, crossfade begins at ~1.33s)
+    // Smoothly dissolve video wrap into the revealed First Page as flap reaches apex
     video.addEventListener('timeupdate', () => {
       if (video.duration && video.currentTime >= video.duration - 0.35 && !video.dataset.fading) {
         video.dataset.fading = '1';
