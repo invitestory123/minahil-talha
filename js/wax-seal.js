@@ -33,97 +33,117 @@ document.addEventListener('DOMContentLoaded', () => {
     musicToggle.addEventListener('click', toggleMusic);
   }
 
-  // Royal Ruby Velvet Wax Seal Envelope Opening 3D Interaction
-  const envelopeOverlay = document.getElementById('envelopeOverlay');
-  const openSealBtn = document.getElementById('openSealBtn');
+  // =========================================================
+  // ROYAL WAX SEAL ENVELOPE INTRO (wax-seal-royale architecture)
+  // =========================================================
+  const overlay = document.getElementById('weiOverlay');
+  const videoWrap = document.getElementById('weiVideoWrap');
+  const video = document.getElementById('weiVideo');
   const skipIntroBtn = document.getElementById('skipIntroBtn');
+  const skipVideoBtn = document.getElementById('skipVideoBtn');
 
-  let isOpening = false;
   let hasOpened = false;
+
+  function startAudio() {
+    if (!audio) return;
+    audio.play().then(() => {
+      isPlaying = true;
+      if (musicToggle) musicToggle.classList.remove('paused');
+      if (musicLabel) musicLabel.textContent = 'Sound';
+    }).catch(err => {
+      console.log('Audio autoplay prevented:', err);
+    });
+  }
+
+  function startVideo() {
+    if (hasOpened) return;
+
+    // Fade out unopened cover overlay
+    if (overlay) {
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 1400);
+    }
+
+    // Show and play video
+    if (videoWrap) videoWrap.classList.add('wei-video-in');
+    if (video) {
+      const vp = video.play();
+      if (vp && vp.catch) vp.catch(() => {});
+    }
+
+    // Start background music
+    startAudio();
+  }
 
   function finishIntro() {
     if (hasOpened) return;
     hasOpened = true;
 
-    if (envelopeOverlay) {
-      envelopeOverlay.classList.add('opened');
+    // Fade out video wrap over 1.4s
+    if (videoWrap) {
+      videoWrap.classList.remove('wei-video-in');
+      videoWrap.classList.add('wei-video-out');
       setTimeout(() => {
-        envelopeOverlay.style.display = 'none';
-      }, 750);
+        videoWrap.style.display = 'none';
+      }, 1400);
+    }
+    if (overlay) {
+      overlay.style.display = 'none';
     }
 
-    // Unlock body scroll
+    // Unlock body scroll and trigger hero section
     document.body.classList.remove('intro-locked');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Trigger resize event after opening so scratch card canvas gets exact dimensions
+    // Trigger resize for scratch card canvas
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
     }, 150);
   }
 
-  function openEnvelope() {
-    if (isOpening) {
-      finishIntro();
-      return;
+  function skipIntro(e) {
+    if (e) e.stopPropagation();
+    startAudio();
+    if (video) {
+      video.pause();
     }
-    isOpening = true;
-
-    // Trigger background audio automatically on user gesture
-    if (audio && audio.paused) {
-      audio.play().then(() => {
-        isPlaying = true;
-        if (musicToggle) musicToggle.classList.remove('paused');
-        if (musicLabel) musicLabel.textContent = 'Sound';
-      }).catch(err => {
-        console.log('Audio playback interaction needed:', err);
-      });
-    }
-
-    if (envelopeOverlay) {
-      envelopeOverlay.classList.add('opening');
-    }
-
-    // Allow user to appreciate the 3D flap unfolding and card slide-up (1.6s), then smoothly dissolve into hero
-    setTimeout(() => {
-      finishIntro();
-    }, 1600);
-  }
-
-  function skipIntro() {
     finishIntro();
-    if (audio && audio.paused) {
-      audio.play().then(() => {
-        isPlaying = true;
-        if (musicToggle) musicToggle.classList.remove('paused');
-        if (musicLabel) musicLabel.textContent = 'Sound';
-      }).catch(() => {});
-    }
   }
 
-  if (openSealBtn) {
-    openSealBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openEnvelope();
-    });
+  if (overlay) {
+    overlay.addEventListener('click', startVideo);
+    overlay.addEventListener('touchstart', startVideo, { passive: true });
   }
+
   if (skipIntroBtn) {
-    skipIntroBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      skipIntro();
-    });
+    skipIntroBtn.addEventListener('click', skipIntro);
+    skipIntroBtn.addEventListener('touchstart', skipIntro, { passive: true });
   }
-  if (envelopeOverlay) {
-    envelopeOverlay.addEventListener('click', (e) => {
-      if (e.target === skipIntroBtn || (skipIntroBtn && skipIntroBtn.contains(e.target))) return;
-      openEnvelope();
+
+  if (skipVideoBtn) {
+    skipVideoBtn.addEventListener('click', skipIntro);
+    skipVideoBtn.addEventListener('touchstart', skipIntro, { passive: true });
+  }
+
+  if (video) {
+    // Fade video 0.8s before end (exact logic from wax-seal-royale.invitestory.in)
+    video.addEventListener('timeupdate', () => {
+      if (video.duration && video.currentTime >= video.duration - 0.8 && !video.dataset.fading) {
+        video.dataset.fading = '1';
+        finishIntro();
+      }
     });
+    video.addEventListener('ended', finishIntro);
+    video.load();
   }
 
   // Support direct opened link
-  if (window.location.search.includes('opened=true') && envelopeOverlay) {
-    envelopeOverlay.classList.add('opened');
-    envelopeOverlay.style.display = 'none';
+  if (window.location.search.includes('opened=true')) {
+    if (overlay) overlay.style.display = 'none';
+    if (videoWrap) videoWrap.style.display = 'none';
     document.body.classList.remove('intro-locked');
   }
 
