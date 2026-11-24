@@ -62,9 +62,9 @@ body.intro-opened #invitation {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 440px;
+  max-width: min(92vw, calc(96vh * 9 / 16), 560px);
   height: 100%;
-  max-height: 100vh;
+  max-height: 98vh;
   display: block;
   object-fit: contain;
   pointer-events: none;
@@ -196,9 +196,9 @@ body.intro-opened #invitation {
 
 #weiVideo {
   width: 100%;
-  max-width: 440px;
+  max-width: min(92vw, calc(96vh * 9 / 16), 560px);
   height: 100%;
-  max-height: 100vh;
+  max-height: 98vh;
   display: block;
   object-fit: contain;
 }
