@@ -34,17 +34,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================
-  // ROYAL WAX SEAL ENVELOPE INTRO (wax-seal-royale architecture)
+  // ROYAL WAX SEAL INTRO — press → golden light burst → reveal
+  // (Pure CSS sequence; no video. Anchored on the seal at cover centre.)
   // =========================================================
   const overlay = document.getElementById('weiOverlay');
-  const videoWrap = document.getElementById('weiVideoWrap');
-  const video = document.getElementById('weiVideo');
   const tapWrap = document.getElementById('weiTapWrap');
+  const dustWrap = document.getElementById('weiDust');
   const skipIntroBtn = document.getElementById('skipIntroBtn');
-  const skipVideoBtn = document.getElementById('skipVideoBtn');
 
   let hasOpened = false;
   let isOpening = false;
+  let revealTimer = null;
+  let hideTimer = null;
+
+  // Floating gold dust motes on the cover
+  if (dustWrap) {
+    const moteCount = window.innerWidth > 600 ? 26 : 16;
+    for (let i = 0; i < moteCount; i++) {
+      const mote = document.createElement('i');
+      const size = (Math.random() * 2.6 + 1.4).toFixed(1);
+      mote.style.left = (Math.random() * 100).toFixed(2) + '%';
+      mote.style.top = (Math.random() * 100).toFixed(2) + '%';
+      mote.style.width = size + 'px';
+      mote.style.height = size + 'px';
+      mote.style.animationDuration = (Math.random() * 5 + 5).toFixed(1) + 's';
+      mote.style.animationDelay = (-Math.random() * 9).toFixed(1) + 's';
+      dustWrap.appendChild(mote);
+    }
+  }
 
   function startAudio() {
     if (!audio) return;
@@ -58,74 +75,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function startVideo(e) {
-    if (isOpening || hasOpened) return;
-    isOpening = true;
-
-    // Immediately fade out the cue/tap label
-    if (tapWrap) {
-      tapWrap.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-      tapWrap.style.opacity = '0';
-      tapWrap.style.transform = 'translateX(-50%) scale(0.92)';
-    }
-
-    // Show video wrap immediately
-    if (videoWrap) {
-      videoWrap.classList.add('wei-video-in');
-    }
-
-    // Start background audio immediately within the user gesture
-    startAudio();
-
-    // Play video
-    if (video) {
-      const vp = video.play();
-      if (vp && vp.catch) vp.catch(() => {});
-
-      let overlayHidden = false;
-      const hideOverlay = () => {
-        if (overlayHidden) return;
-        overlayHidden = true;
-        if (overlay) {
-          overlay.style.transition = 'opacity 0.35s ease';
-          overlay.style.opacity = '0';
-          overlay.style.pointerEvents = 'none';
-          setTimeout(() => {
-            overlay.style.display = 'none';
-          }, 380);
-        }
-      };
-
-      video.addEventListener('playing', hideOverlay, { once: true });
-      // Fallback in case 'playing' is delayed
-      setTimeout(hideOverlay, 180);
-    } else if (overlay) {
-      overlay.style.display = 'none';
-    }
-  }
-
-  function finishIntro() {
+  // Reveal the invitation underneath the dissolving gold light
+  function revealInvitation() {
     if (hasOpened) return;
     hasOpened = true;
 
-    // Smoothly fade out video wrap into the revealed hero page
-    if (videoWrap) {
-      videoWrap.classList.remove('wei-video-in');
-      videoWrap.classList.add('wei-video-out');
-      setTimeout(() => {
-        videoWrap.style.display = 'none';
-      }, 950);
-    }
-    if (overlay) {
-      overlay.style.display = 'none';
-    }
-
-    // Unlock body scroll and reveal invitation
     document.body.classList.remove('intro-locked');
     document.body.classList.add('intro-opened');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Show floating audio button with smooth fade
     if (musicToggle) {
       musicToggle.style.visibility = 'visible';
       musicToggle.style.opacity = '1';
@@ -138,21 +96,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 150);
   }
 
+  function hideOverlay() {
+    if (overlay) {
+      overlay.style.display = 'none';
+      overlay.style.pointerEvents = 'none';
+    }
+  }
+
+  function openIntro(e) {
+    if (isOpening || hasOpened) return;
+    if (e && e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+    if (e && e.type === 'keydown') e.preventDefault();
+    isOpening = true;
+
+    // Immediately fade out the cue/tap label
+    if (tapWrap) {
+      tapWrap.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+      tapWrap.style.opacity = '0';
+      tapWrap.style.transform = 'translateX(-50%) scale(0.9)';
+    }
+
+    // Start background audio immediately within the user gesture
+    startAudio();
+
+    // Run the press → burst → dissolve sequence
+    if (overlay) overlay.classList.add('wei-opening');
+
+    // Reveal the page while the gold burst still covers the screen
+    revealTimer = setTimeout(revealInvitation, 1100);
+    // Drop the overlay once it has fully dissolved (CSS ends at 1.75s)
+    hideTimer = setTimeout(hideOverlay, 1900);
+  }
+
   function skipIntro(e) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
     startAudio();
-    if (video) {
-      video.pause();
-    }
-    finishIntro();
+    clearTimeout(revealTimer);
+    clearTimeout(hideTimer);
+    revealInvitation();
+    hideOverlay();
   }
 
   if (overlay) {
-    overlay.addEventListener('click', startVideo);
-    overlay.addEventListener('touchstart', startVideo, { passive: true });
+    overlay.addEventListener('click', openIntro);
+    overlay.addEventListener('touchstart', openIntro, { passive: true });
+    overlay.addEventListener('keydown', openIntro);
   }
 
   if (skipIntroBtn) {
@@ -160,34 +151,12 @@ document.addEventListener('DOMContentLoaded', () => {
     skipIntroBtn.addEventListener('touchstart', skipIntro, { passive: true });
   }
 
-  if (skipVideoBtn) {
-    skipVideoBtn.addEventListener('click', skipIntro);
-    skipVideoBtn.addEventListener('touchstart', skipIntro, { passive: true });
-  }
-
-  if (video) {
-    // Fade video 0.8s before end (exact logic from wax-seal-royale.invitestory.in)
-    video.addEventListener('timeupdate', () => {
-      if (video.duration && video.currentTime >= video.duration - 0.8 && !video.dataset.fading) {
-        video.dataset.fading = '1';
-        finishIntro();
-      }
-    });
-    video.addEventListener('ended', finishIntro);
-    video.load();
-  }
-
   // Support direct opened link
   if (window.location.search.includes('opened=true')) {
-    if (overlay) overlay.style.display = 'none';
-    if (videoWrap) videoWrap.style.display = 'none';
-    document.body.classList.remove('intro-locked');
-    document.body.classList.add('intro-opened');
-    if (musicToggle) {
-      musicToggle.style.visibility = 'visible';
-      musicToggle.style.opacity = '1';
-      musicToggle.style.pointerEvents = 'auto';
-    }
+    clearTimeout(revealTimer);
+    clearTimeout(hideTimer);
+    revealInvitation();
+    hideOverlay();
   }
 
   // Atmospheric Gold Embers, Fireflies & Twinkling Stars Canvas on Hero

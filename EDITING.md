@@ -5,8 +5,9 @@ This luxury royal Pakistani wedding invitation is customized for the **Barat Cer
 The invitation seamlessly integrates:
 1. **Interactive Burgundy Wax Seal Intro**:
    - Features the customer's authentic deep red shield wax seal with the royal interwoven **TM** monogram and gold rope border (`editable/assets/tm-shield-seal.png` & `editable/assets/envelope-cover.png`).
-   - "Tap Seal to Open" pulsing golden indicator with audio trigger.
-   - Quick "Skip" button for instant viewing.
+   - Pure CSS/JS opening sequence (no video): tap the seal to press it, a golden light blooms outward from the monogram, and the cover dissolves into the first page.
+   - "Tap to Open" pulsing golden indicator with audio trigger, floating gold dust and halo rings over the seal.
+   - Quick "Skip" button for instant viewing (`?opened=true` also bypasses the intro).
 2. **First Page / Hero (Modest Royal Couple Portrait)**:
    - Features the royal couple embracing on the palace terrace at sunset (`editable/assets/modest-couple-hero.jpg`).
    - Respectfully depicts the bride in 100% modest Pakistani bridal attire (the bare midriff/waist has been meticulously covered in matching royal red bridal fabric with intricate gold zardozi embroidery).
